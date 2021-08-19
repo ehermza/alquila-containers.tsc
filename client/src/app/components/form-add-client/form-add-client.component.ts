@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ContainersService } from '../../services/containers.service';
 
+
 @Component({
-  selector: 'app-blank',
-  templateUrl: './blank.component.html',
-  styleUrls: ['./blank.component.css']
+  selector: 'app-form-add-client',
+  templateUrl: './form-add-client.component.html',
+  styleUrls: ['./form-add-client.component.css']
 })
-export class BlankComponent implements OnInit {
+
+export class FormAddClientComponent implements OnInit {
   list: any = [];
   dataSource: any = [];
 
@@ -38,3 +40,13 @@ export class BlankComponent implements OnInit {
 function filtrar(objeto: any) {
   return (objeto.rented_by == "");
 }
+
+/* export class FormAddClientComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+ */

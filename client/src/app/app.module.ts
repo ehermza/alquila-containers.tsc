@@ -10,16 +10,18 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 
 import { ContainersService } from './services/containers.service';
-import { BlankComponent } from './components/blank/blank.component';
+// import { BlankComponent } from './components/blank/blank.component';
 import { NavigatorComponent } from './components/navigator/navigator.component';
+import { FormAddClientComponent } from './components/form-add-client/form-add-client.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    BlankComponent,
+    // BlankComponent,
     NavigatorComponent,
+    FormAddClientComponent,
 
   ],
   imports: [
