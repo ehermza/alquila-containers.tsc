@@ -13,6 +13,7 @@ import { ContainersService } from './services/containers.service';
 // import { BlankComponent } from './components/blank/blank.component';
 import { NavigatorComponent } from './components/navigator/navigator.component';
 import { FormAddClientComponent } from './components/form-add-client/form-add-client.component';
+import { FormClientComponent } from './components/form-client/form-client.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormAddClientComponent } from './components/form-add-client/form-add-cl
     // BlankComponent,
     NavigatorComponent,
     FormAddClientComponent,
+    FormClientComponent,
 
   ],
   imports: [
