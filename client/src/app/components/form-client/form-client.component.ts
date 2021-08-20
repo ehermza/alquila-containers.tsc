@@ -19,7 +19,8 @@ export class FormClientComponent implements OnInit {
     this.getClient('6109dc44cb91910827528f5c');
   }
 
-  getClient(idclient:String) {
+  getClient(idclient:String)
+   {
     this.clientService.getClient(idclient)
       .subscribe (
          (res) => {

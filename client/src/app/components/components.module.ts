@@ -14,9 +14,9 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [
     NavigatorComponent,
     FormAddClientComponent,
-    TableComponent
-    // FormClientComponent,
-    // FormContainerComponent,
+    TableComponent,
+    FormClientComponent,
+    FormContainerComponent,
 
   ],
   imports: [
@@ -26,9 +26,9 @@ import { MatTableModule } from '@angular/material/table';
   exports: [
     NavigatorComponent,
     FormAddClientComponent,
-    TableComponent
-    // FormContainerComponent,
-    // FormClientComponent,
+    TableComponent,
+    FormContainerComponent,
+    FormClientComponent,
   ]
 })
 export class ComponentsModule { }

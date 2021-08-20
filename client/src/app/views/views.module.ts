@@ -4,15 +4,19 @@ import { CommonModule } from '@angular/common';
 import { PageClientComponent } from './page-client/page-client.component';
 import { ComponentsModule } from '../components/components.module';
 
-import { NavigatorComponent } from '../components/navigator/navigator.component';
-import { FormAddClientComponent } from '../components/clients/form-add-client/form-add-client.component';
-import { TableComponent } from '../components/clients/table/table.component';
+// import { NavigatorComponent } from '../components/navigator/navigator.component';
+// import { FormAddClientComponent } from '../components/clients/form-add-client/form-add-client.component';
+// import { TableComponent } from '../components/clients/table/table.component';
+import { PageContainersComponent } from './page-containers/page-containers.component';
+import { PageProfileComponent } from './page-profile/page-profile.component';
 
 
 
 @NgModule({
   declarations: [
-    PageClientComponent
+    PageClientComponent,
+    PageContainersComponent,
+    PageProfileComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +26,8 @@ import { TableComponent } from '../components/clients/table/table.component';
     //  TableComponent
   ],
   exports: [
-     PageClientComponent
+     PageClientComponent,
+     PageProfileComponent
   ]
 })
 export class ViewsModule { }

@@ -20,4 +20,8 @@ export class ContainersService {
     // return this.http.get(`${this.API_URI}/containers`);
     return this.http.get(`/api/containers`);
   }
+
+  getContainerOne(idcont: String) {
+    return this.http.get(`/api/containers/${idcont}`)
+  }
 }
