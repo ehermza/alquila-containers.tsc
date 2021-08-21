@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-profile',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageProfileComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  idctner:string = '';
+  // constructor() { }
+  constructor(private route: ActivatedRoute) { }
+  
+  ngOnInit(): void 
+  {
+    let ver = this.route.snapshot.paramMap.get("id");
+    if(ver!= null) {
+      this.idctner = ver;
+    }
+    console.log(this.idctner);
   }
 
 }

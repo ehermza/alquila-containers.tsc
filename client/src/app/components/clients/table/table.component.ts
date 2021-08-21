@@ -13,7 +13,7 @@ export class TableComponent implements OnInit {
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = ELEMENT_DATA;
-  displayedColumns: string[] = ['id_container','price_tocharge','rented_by','active'];
+  displayedColumns: string[] = ['id_container','price_tocharge','rented_by','active', '_id'];
   dataSource: any= [];
 
   constructor(private gameService: ContainersService) {

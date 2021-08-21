@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder } from '@angular/forms';
 
 import { ClientService } from 'src/app/services/client.service';
@@ -10,16 +10,19 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class FormClientComponent implements OnInit {
 
+  @Input() IDCLIENT:string = '';
+  
   cliente: any= {};
-
+  
   constructor(private clientService:ClientService) {     
   }
-
+  
   ngOnInit(): void {
-    this.getClient('6109dc44cb91910827528f5c');
+    
+    this.getClient(this.IDCLIENT);
   }
 
-  getClient(idclient:String)
+  getClient(idclient:string)
    {
     this.clientService.getClient(idclient)
       .subscribe (

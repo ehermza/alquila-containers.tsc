@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ContainersService } from 'src/app/services/containers.service';
 
 @Component({
@@ -8,18 +8,20 @@ import { ContainersService } from 'src/app/services/containers.service';
 })
 export class FormContainerComponent implements OnInit {
 
+  @Input() IDCONT: string= '';
+
   container: any= {};
 
   constructor(private containersService:ContainersService) {     
   }
 
   ngOnInit(): void {
-    this.getContainerOne('6109d38c69b2d1aea1f481a4');
+    this.getContainerOne(this.IDCONT);
   }
 
-  getContainerOne(idclient:String)
+  getContainerOne(idctner:String)
    {
-    this.containersService.getContainerOne(idclient)
+    this.containersService.getContainerOne(idctner)
       .subscribe (
          (res) => {
           this.container = res;
