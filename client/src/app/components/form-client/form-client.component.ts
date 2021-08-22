@@ -10,14 +10,17 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class FormClientComponent implements OnInit {
 
-  @Input() IDCLIENT:string = '';
-  
-  cliente: any= {};
+  // @Input() IDCLIENT:string = '';
+  @Input() CLIENT: any= {};
   
   constructor(private clientService:ClientService) {     
   }
-  
+
   ngOnInit(): void {
+      
+  }  
+  
+/*   ngOnInit(): void {
     
     this.getClient(this.IDCLIENT);
   }
@@ -35,5 +38,5 @@ export class FormClientComponent implements OnInit {
         }
       );
   }
-
+ */
 }

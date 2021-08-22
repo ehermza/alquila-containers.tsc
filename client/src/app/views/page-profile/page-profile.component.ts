@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ContainersService } from 'src/app/services/containers.service';
 
+import { ClientService } from 'src/app/services/client.service';
+import { ContainersService } from 'src/app/services/containers.service';
 
 @Component({
   selector: 'app-page-profile',
   templateUrl: './page-profile.component.html',
   styleUrls: ['./page-profile.component.css']
 })
-export class PageProfileComponent implements OnInit {
-
-  // idctner:string = '';
+export class PageProfileComponent implements OnInit 
+{
   container: any = {};
+  client: any = {};
   
   constructor(
-    private route: ActivatedRoute,
-    private containersService: ContainersService
+      private route: ActivatedRoute,
+      private containersService: ContainersService,
+      private clientService: ClientService
     ) { }
 
   ngOnInit(): void {
@@ -24,7 +26,18 @@ export class PageProfileComponent implements OnInit {
       // this.idctner = ver;  deprecated!
       this.getContainer(idByUrl);
     }
-    console.log(`(PageProfileComponent) container: ${this.container}`);
+    console.log(`(PageProfile) container: ${this.container}`);
+  }
+
+  setClient(idclient:string) {
+    this.clientService.getClient(idclient)
+      .subscribe(
+        (res) => {
+          this.client = res;
+          console.log(`(PageProfile) Client: ${this.client}`);
+        },
+        (err) => console.log(err)
+      ) 
   }
 
   getContainer(idctner:String)
@@ -33,11 +46,10 @@ export class PageProfileComponent implements OnInit {
       .subscribe (
          (res) => {
           this.container = res;
-			 console.log(this.container);
+			  console.log(this.container);
+          this.setClient(this.container.rented_by_id);
         },
-         (err) => {
-          console.error(err);
-        }
+         (err) => console.error(err)
       );
   }
 }
