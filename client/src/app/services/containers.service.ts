@@ -12,10 +12,6 @@ export class ContainersService {
 
   constructor(private http: HttpClient) { }
 
-  /*   getGames() {
-      return this.http.get(`${this.API_URI}/games`);
-    }
-   */
   getContainers() {
     // return this.http.get(`${this.API_URI}/containers`);
     return this.http.get(`/api/containers`);

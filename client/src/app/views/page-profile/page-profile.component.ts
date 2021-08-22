@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ContainersService } from 'src/app/services/containers.service';
+
 
 @Component({
   selector: 'app-page-profile',
@@ -8,17 +10,34 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PageProfileComponent implements OnInit {
 
-  idctner:string = '';
-  // constructor() { }
-  constructor(private route: ActivatedRoute) { }
+  // idctner:string = '';
+  container: any = {};
   
-  ngOnInit(): void 
-  {
-    let ver = this.route.snapshot.paramMap.get("id");
-    if(ver!= null) {
-      this.idctner = ver;
+  constructor(
+    private route: ActivatedRoute,
+    private containersService: ContainersService
+    ) { }
+
+  ngOnInit(): void {
+    let idByUrl = this.route.snapshot.paramMap.get("id");
+    if (idByUrl != null) {
+      // this.idctner = ver;  deprecated!
+      this.getContainer(idByUrl);
     }
-    console.log(this.idctner);
+    console.log(`(PageProfileComponent) container: ${this.container}`);
   }
 
+  getContainer(idctner:String)
+   {
+    this.containersService.getContainerOne(idctner)
+      .subscribe (
+         (res) => {
+          this.container = res;
+			 console.log(this.container);
+        },
+         (err) => {
+          console.error(err);
+        }
+      );
+  }
 }

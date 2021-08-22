@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ContainersService } from 'src/app/services/containers.service';
 
 @Component({
   selector: 'app-form-container',
@@ -8,37 +7,12 @@ import { ContainersService } from 'src/app/services/containers.service';
 })
 export class FormContainerComponent implements OnInit {
 
-  @Input() IDCONT: string= '';
+  @Input() CONTAINER: any= {};
 
-  container: any= {};
-
-  constructor(private containersService:ContainersService) {     
+    constructor() { }
+  
+    ngOnInit(): void {
+    }
+  
   }
-
-  ngOnInit(): void {
-    this.getContainerOne(this.IDCONT);
-  }
-
-  getContainerOne(idctner:String)
-   {
-    this.containersService.getContainerOne(idctner)
-      .subscribe (
-         (res) => {
-          this.container = res;
-			 console.log(this.container);
-        },
-         (err) => {
-          console.error(err);
-        }
-      );
-  }
-
-}
-
-/*   constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
- */
+  

@@ -3,21 +3,21 @@
         <h3 class="text-center">Contenedor</h3>
     </div>
     <div class="card-body">
-        <form action="/containers/edit/{{ container._id }} " method="POST">
+        <form action="/containers/edit/{{ CONTAINER._id }} " method="POST">
             <div class="input-group mb-3">
                 <span class="input-group-text">Container </span>
-                <input type="text" readonly value='{{container.id_container}}' class="form-control" placeholder="00"
+                <input type="text" readonly value='{{CONTAINER.id_container}}' class="form-control" placeholder="00"
                     name="id_container">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Cliente </span>
-                <input type="text" value={{container.rented_by}} class="form-control" placeholder="Apellido, Nombre"
+                <input type="text" value={{CONTAINER.rented_by}} class="form-control" placeholder="Apellido, Nombre"
                     name="rented_by">
-                <a href="/containers/unlink/{{container._id}}" class="btn btn-outline-info">Desvincular</a>
+                <a href="/containers/unlink/{{CONTAINER._id}}" class="btn btn-outline-info">Desvincular</a>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Valor Mensual $</span>
-                <input type="number" step="1" value='{{ container.price_tocharge }}' class="form-control"
+                <input type="number" step="1" value='{{ CONTAINER.price_tocharge }}' class="form-control"
                     placeholder="0.00" name="price_tocharge">
             </div>
             <button class="btn btn-block btn-outline-success" type="submit" id="btn-update">Actualizar Importe</button>
