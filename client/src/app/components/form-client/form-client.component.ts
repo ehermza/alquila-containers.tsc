@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 // import { FormGroup,  FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { ClientService } from 'src/app/services/client.service';
 import { ActivatedRoute } from '@angular/router';
+import { Client } from 'src/app/models/Client';
 
 @Component({
   selector: 'app-form-client',
@@ -14,9 +15,16 @@ export class FormClientComponent implements OnInit {
 
   // @Input() IDCLIENT:string = '';
   @Input() CLIENT: any = {};
-  idclient: string = '-1';
-
+  
+  
+  submitted = false;
+  idclient: string = '';
+  // idclient: string | null = '-1';
   urlpath: string = '';
+
+
+  // model = new Client(this.idByUrl, this.CLIENT.name, this.CLIENT.telephone, this.CLIENT.DNI, this.CLIENT.business, true);
+  model: Client = new Client();
 
   constructor(
     private route: ActivatedRoute,
@@ -24,41 +32,61 @@ export class FormClientComponent implements OnInit {
     private http: HttpClient
   ) { }
 
-  ngOnInit(): void 
+  setAtributtes(idByUrl: string) 
   {
-    // this.http.put<any>('https://jsonplaceholder.typicode.com/posts/1', this.CLIENT)
-     this.urlpath = this.route.snapshot.pathFromRoot.toString();
-     console.log(`URL SNAPSHOT:`, this.urlpath);
-     return;
-/*     let idByUrl = this.route.snapshot.paramMap.get("id");
-    if (idByUrl != null) {
-      // this.idctner = ver;  deprecated!
-      this.getContainer(idByUrl);
-    }
-    console.log(`(PageProfile) container: ${this.container}`);
-
-    this.http.put<any>('/api/clients/:id', this.CLIENT)
-      .subscribe(data => this.idclient = data._id);
- */
+    this.idclient = idByUrl;
+    this.model.setId(this.idclient);
+    
+    this.model.setAtributtes(
+      this.CLIENT.name,
+      this.CLIENT.telephone,
+      this.CLIENT.DNI,
+      this.CLIENT.business,
+      true
+      );
+      // this.model = this.CLIENT;
+      
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log('ngOnChanges() :', changes);
+    let id = this.route.snapshot.paramMap.get("id");
+    this.setAtributtes((id != null) ? id : '');
   }
 
-  /*   ngOnInit(): void {
-      
-      this.getClient(this.IDCLIENT);
+  ngOnInit(): void 
+  {
+    console.log("ONINIT(): ", this.CLIENT);
+    // this.http.put<any>('https://jsonplaceholder.typicode.com/posts/1', this.CLIENT)
+
+    /*     
+        let idByUrl = this.route.snapshot.paramMap.get("id");
+        if (idByUrl != null) {
+          // this.idctner = ver;  deprecated!
+          this.getContainer(idByUrl);
+        }
+        console.log(`(PageProfile) container: ${this.container}`);
+    
+        this.http.put<any>('/api/clients/:id', this.CLIENT)
+          .subscribe(data => this.idclient = data._id);
+     */
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    let idByUrl = this.route.snapshot.paramMap.get("id");
+    if (idByUrl == null) {
+      // this.idctner = ver;  deprecated!
+      return;
     }
-  
-    getClient(idclient:string)
-     {
-      this.clientService.getClient(idclient)
-        .subscribe (
-           (res) => {
-            this.cliente = res;
-         console.log(this.cliente);
-          },
-           (err) => {
-            console.error(err);
-          }
-        );
-    }
-   */
+
+    console.log('SEND DATA FORM TO UPDATE! CLIENT ID:', idByUrl);
+    const ruta = `/api/clients/${idByUrl}`;
+
+    this.http.put<Client>(ruta, this.CLIENT)
+      .subscribe(data => {
+        this.idclient = data._id;
+        console.log(data);
+      });
+
+  }
 }

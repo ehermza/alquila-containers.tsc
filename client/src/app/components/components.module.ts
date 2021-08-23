@@ -9,6 +9,7 @@ import { FormClientComponent } from './form-client/form-client.component';
 import { FormContainerComponent } from './form-container/form-container.component';
 import { TableComponent } from './clients/table/table.component';
 import { FormAddClientComponent } from './clients/form-add-client/form-add-client.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { FormAddClientComponent } from './clients/form-add-client/form-add-clien
     CommonModule,
     MatTableModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+
 
   ], 
   exports: [

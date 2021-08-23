@@ -1,22 +1,27 @@
+{{ model | json }}
 <div class="card border-primary mb-3" style="max-width: 60rem;">
     <div class="card-header">
         <h3 class="text-center">Datos del Cliente </h3>
     </div>
     <div class="card-body">
-        <form action="api/clients/update/{{ CLIENT._id }}" method="POST">
-            <div class="input-group mb-3">
+        <!-- <form action="api/clients/update/{{ CLIENT._id }}" method="POST"> -->
+        <form (ngSubmit)="onSubmit()" #formClient="ngForm">
+            <div class="form-group mb-3">
                 <span class="input-group-text">Nombre Cliente</span>
-                <input type="text" class="form-control" value="{{ CLIENT.name }}" name="name" />
+                <!-- <input type="text" class="form-control" value="{{ CLIENT.name }}" name="name" /> -->
+                <input type="text" class="form-control" value="{{ CLIENT.name }}" name="name" [(ngModel)]="model.name" />
+                
             </div>
-            <div class="input-group mb-3">
+            <div class="form-group mb-3">
                 <span class="input-group-text">Teléfono</span>
-                <input type="text" class="form-control" name="telephone" value="{{ CLIENT.telephone }}"
-                />
+                <!-- <input type="text" class="form-control" name="telephone" value="{{ CLIENT.telephone }}"/> -->
+                <input type="text" class="form-control" name="telephone" value="{{ CLIENT.telephone }}" [(ngModel)]="model.telephone" />
             </div>
-            <div class="input-group mb-3">
+            <div class="form-group mb-3">
                 <span class="input-group-text">Razón Social</span>
-                <input type="text" class="form-control" name="business"
-                    value="{{ CLIENT.business }}" />
+                <!-- <input type="text" class="form-control" name="business" value="{{ CLIENT.business }}" /> -->
+                <input type="text" class="form-control" name="business" value="{{ CLIENT.business }}" [(ngModel)]="model.business" />
+
             </div>
             <div class="input-group">
                 <span class="input-group-text">Saldo Actual:</span>
