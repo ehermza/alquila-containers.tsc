@@ -9,7 +9,9 @@ export class Contenedor
     description?: string;
     active?: boolean = false;
 
-    constructor() { }
+    constructor(isActive:boolean) { 
+        this.active = isActive;
+    }
 
     public setAtributtes(_id: string, numberCtdor: Number, value: Number, client:string) {
         this._id = _id;

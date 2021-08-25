@@ -20,4 +20,7 @@ export class ContainersService {
   getContainerOne(idcont: String) {
     return this.http.get(`/api/containers/${idcont}`)
   }
+  getCountainerbyNumber(ctnumber: Number) {
+    return this.http.get(`/api/containers/number/${ctnumber}`)
+  }
 }

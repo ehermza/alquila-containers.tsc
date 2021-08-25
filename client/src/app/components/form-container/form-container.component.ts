@@ -14,7 +14,7 @@ export class FormContainerComponent implements OnInit {
   @Input() CONTAINER: any= {};
 
     idCtner:string= '';
-    model:Contenedor = new Contenedor();
+    model:Contenedor = new Contenedor(true);
     submitted = false;
 
     constructor(private http:HttpClient) { }

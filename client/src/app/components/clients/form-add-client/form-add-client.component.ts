@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Contenedor } from 'src/app/models/Contenedor';
 import { ContainersService } from '../../../services/containers.service';
 
-
-
 @Component({
   selector: 'app-form-add-client',
   templateUrl: './form-add-client.component.html',
@@ -17,12 +15,12 @@ export class FormAddClientComponent implements OnInit {
   dataSource: any = [];
 
   submitted = false;
-  model: Contenedor = new Contenedor();
+  model: Contenedor = new Contenedor(true);
 
   constructor(
-    private gameService: ContainersService,
-    private http:HttpClient
-    ) {
+    private ctnerService: ContainersService,
+    private http: HttpClient
+  ) {
   }
 
   ngOnInit(): void {
@@ -32,7 +30,7 @@ export class FormAddClientComponent implements OnInit {
 
 
   getContainers() {
-    this.gameService.getContainers()
+    this.ctnerService.getContainers()
       .subscribe(
         res => {
           this.list = res;
@@ -45,14 +43,31 @@ export class FormAddClientComponent implements OnInit {
       );
   }
 
+  obj: any = {};
+  idCtner: string = '';
+
   addClient() {
     this.submitted = true;
-    this.http.post<any>('/api/containers/', this.model)
+
+    let ctnumber: Number = this.model.id_container;
+    // let urlstr:string = '/api/containers/number' ;
+    // urlstr += ctnumber.toString();
+
+    this.ctnerService.getCountainerbyNumber(ctnumber)
       .subscribe(
-      (data) => { console.log('addClient() to database', data); 
-    });
+        (data) => {
+          this.obj = data;
+          // this.idCtner = this.array.filter(getIdCtner);
+          this.idCtner = this.obj._id;
+          console.log('id container identified: ', this.idCtner);
+        },
+        (err) => console.log(err)
+      );
   }
-  
+
+}
+function getIdCtner(objeto: any) {
+  return (objeto._id);
 }
 
 function filtrar(objeto: any) {
