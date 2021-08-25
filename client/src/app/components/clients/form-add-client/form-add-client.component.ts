@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Contenedor } from 'src/app/models/Contenedor';
 import { ContainersService } from '../../../services/containers.service';
+
 
 
 @Component({
@@ -9,10 +12,17 @@ import { ContainersService } from '../../../services/containers.service';
 })
 
 export class FormAddClientComponent implements OnInit {
+
   list: any = [];
   dataSource: any = [];
 
-  constructor(private gameService: ContainersService) {
+  submitted = false;
+  model: Contenedor = new Contenedor();
+
+  constructor(
+    private gameService: ContainersService,
+    private http:HttpClient
+    ) {
   }
 
   ngOnInit(): void {
@@ -34,19 +44,17 @@ export class FormAddClientComponent implements OnInit {
         }
       );
   }
+
+  addClient() {
+    this.submitted = true;
+    this.http.post<any>('/api/containers/', this.model)
+      .subscribe(
+      (data) => { console.log('addClient() to database', data); 
+    });
+  }
   
 }
 
 function filtrar(objeto: any) {
   return (objeto.rented_by == "");
 }
-
-/* export class FormAddClientComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
- */
