@@ -1,4 +1,5 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 import { ContainersService } from 'src/app/services/containers.service';
 
@@ -15,6 +16,7 @@ export class TableComponent implements OnInit {
   // dataSource = ELEMENT_DATA;
   displayedColumns: string[] = ['id_container','price_tocharge','rented_by','active', '_id'];
   dataSource: any= [];
+  list:any= [];
 
   constructor(private gameService: ContainersService) {
   }
@@ -27,12 +29,17 @@ export class TableComponent implements OnInit {
   getContainers() {
     this.gameService.getContainers()
     .subscribe(
-      res => {
-        this.dataSource = res;
+      (res) => {
+        this.list = res;
+        this.dataSource = this.list.filter(filtrar);
         // console.log(this.games);
         },
-        err => console.error(err)
+        (err) => console.error(err)
       );
   }
 
+}
+
+function filtrar(objeto:any) {
+  return (objeto.active);
 }

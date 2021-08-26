@@ -12,4 +12,9 @@ export class ClientService {
     console.log(`(ClientService) said: /api/clients/${idclient}`);
     return this.http.get(`/api/clients/${idclient}`);
   }
+  
+  createClient(body:any) {
+    return this.http.post('/api/clients/', body);
+    
+  }
 }

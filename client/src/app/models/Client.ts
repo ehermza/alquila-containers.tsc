@@ -6,9 +6,13 @@ export class Client {
     public DNI?: string;
     public business?: string;
     public active?: boolean;
+    public deudas_total:Number= 0;
+    public pagos_total:Number= 0;
 
     // constructor(idclient:string) { 
-    constructor() { }
+    constructor(isActive?:boolean) {
+        this.active= isActive;
+     }
     
     public setId(ID: string) { 
         this._id= ID;

@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
         <!-- <form action="/containers/add" method="POST"> -->
-        <form (ngSubmit)="addClient()" #formAddClient="ngForm">
+        <form (ngSubmit)="submit()" #formAddClient="ngForm">
             <div class="input-group mb-3">
 
                 <select class="form-select" [(ngModel)]="model.id_container" name="id_container" required>

@@ -26,13 +26,13 @@ export class FormContainerComponent implements OnInit {
     {
       this.idCtner = this.CONTAINER._id;
       console.log(`(formContainer) CONTAINER.get() `, this.CONTAINER);
-      // this.model.setId(this.CONTAINER._id);
+
+      this.model.setId(this.CONTAINER._id);
       this.model.setAtributtes(
-        this.CONTAINER._id,
         this.CONTAINER.id_container,
         this.CONTAINER.price_tocharge,
         this.CONTAINER.rented_by
-      )
+      );
     }
 
     unlinkClient() 
