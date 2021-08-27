@@ -9,7 +9,7 @@ import { FormClientComponent } from './form-client/form-client.component';
 import { FormContainerComponent } from './form-container/form-container.component';
 import { TableComponent } from './clients/table/table.component';
 import { FormAddClientComponent } from './clients/form-add-client/form-add-client.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-
+    ReactiveFormsModule // for validate inputs in form-add-client
 
   ], 
   exports: [

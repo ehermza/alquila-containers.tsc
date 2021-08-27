@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Client } from 'src/app/models/Client';
 import { Contenedor } from 'src/app/models/Contenedor';
 
@@ -23,13 +24,25 @@ export class FormAddClientComponent implements OnInit {
   model: Contenedor = new Contenedor(true);
 
   constructor(
+    // private fb: FormBuilder,    // for validate form
     private ctnerService: ContainersService,
     private clientService: ClientService,
     private http: HttpClient
-  ) {
+  ) { }
+
+  formAddClient = new FormGroup({
+     id_container: new FormControl(),
+    rented_by: new FormControl ('', Validators.required),
+    price_tocharge: new FormControl ('', Validators.pattern(/^[0-9]*$/)),
+    active: new FormControl(true)
+
+  })
+
+  validateform() {
   }
 
   ngOnInit(): void {
+    // this.validateform()
     this.getContainers();
     console.log(this.dataSource);
   }
@@ -68,7 +81,7 @@ export class FormAddClientComponent implements OnInit {
     this.clientService.createClient(client).subscribe(
       (data) => {
         console.log('this.clientService.createClient: ', data);
-        const obj:any = data;
+        const obj: any = data;
         this.idClient = obj._id;
         this.linkClientByCtner();
       },
@@ -77,7 +90,7 @@ export class FormAddClientComponent implements OnInit {
   }
 
   submit() {
-    if(this.submitted) return;
+    if (this.submitted) return;
     this.submitted = true;
 
     let ctnumber: Number = this.model.id_container;

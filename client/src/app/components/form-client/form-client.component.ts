@@ -3,8 +3,9 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { ClientService } from 'src/app/services/client.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-client',
@@ -13,21 +14,27 @@ import { Client } from 'src/app/models/Client';
 })
 export class FormClientComponent implements OnInit {
 
-  // @Input() IDCLIENT:string = '';
   @Input() CLIENT: any = {};
 
   submitted = false;
   idclient: string = '';
-  // idclient: string | null = '-1';
   urlpath: string = '';
 
   model: Client = new Client();
 
   constructor(
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
+    private router:Router,
     private clientService: ClientService,
     private http: HttpClient
   ) { }
+
+  formClient = new FormGroup({
+    name:new FormControl('',Validators.required), 
+    telephone: new FormControl(),
+    business: new FormControl(),
+    saldo_act: new FormControl()
+  })
 
   ngOnChanges(changes: SimpleChanges) 
   {
@@ -49,8 +56,6 @@ export class FormClientComponent implements OnInit {
     );
 
     console.log("ngOnChanges(): ", this.model);
-    // let id = this.route.snapshot.paramMap.get("id");  
-    // wrong! is routes contains idcontainer, not client.
   }
 
   ngOnInit(): void {
@@ -63,6 +68,6 @@ export class FormClientComponent implements OnInit {
       .subscribe(
         data => { console.log(data) }
       );
-
+      this.router.navigate(['/clients']);
   }
 }
