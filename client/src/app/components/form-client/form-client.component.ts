@@ -48,11 +48,7 @@ export class FormClientComponent implements OnInit {
     }
     
     this.model.setAtributtes(
-      this.CLIENT.name,
-      this.CLIENT.telephone,
-      this.CLIENT.DNI,
-      this.CLIENT.business,
-      true
+      this.CLIENT.name,this.CLIENT.telephone,this.CLIENT.DNI,this.CLIENT.business,true
     );
 
     console.log("ngOnChanges(): ", this.model);
@@ -68,6 +64,6 @@ export class FormClientComponent implements OnInit {
       .subscribe(
         data => { console.log(data) }
       );
-      this.router.navigate(['/clients']);
+      this.router.navigate(['/clients/alert/200']);
   }
 }

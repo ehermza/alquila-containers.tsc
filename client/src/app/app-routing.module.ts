@@ -6,10 +6,12 @@ import { PageProfileComponent } from './views/page-profile/page-profile.componen
 
 const routes: Routes = [
   { path: 'clients', component: PageClientComponent },
+  { path: 'clients/alert/:id', component: PageClientComponent },
+
   { path: 'containers', component: PageProfileComponent },
   { path: 'containers/edit/:id', component: PageProfileComponent },
 
-  { path: '**', pathMatch: 'full', redirectTo: 'clients' }
+  // { path: '**', pathMatch: 'full', redirectTo: 'clients' }
 ];
 
 @NgModule({

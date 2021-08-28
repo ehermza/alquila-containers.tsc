@@ -10,6 +10,7 @@ import { FormContainerComponent } from './form-container/form-container.componen
 import { TableComponent } from './clients/table/table.component';
 import { FormAddClientComponent } from './clients/form-add-client/form-add-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TableComponent,
     FormClientComponent,
     FormContainerComponent,
+    AlertComponent,
 
   ],
   imports: [
@@ -35,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TableComponent,
     FormContainerComponent,
     FormClientComponent,
+    AlertComponent
   ]
 })
 export class ComponentsModule { }
