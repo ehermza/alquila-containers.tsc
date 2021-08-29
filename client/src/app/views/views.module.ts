@@ -9,6 +9,7 @@ import { ComponentsModule } from '../components/components.module';
 // import { TableComponent } from '../components/clients/table/table.component';
 import { PageContainersComponent } from './page-containers/page-containers.component';
 import { PageProfileComponent } from './page-profile/page-profile.component';
+import { PagePaysComponent } from './page-pays/page-pays.component';
 
 
 
@@ -16,7 +17,8 @@ import { PageProfileComponent } from './page-profile/page-profile.component';
   declarations: [
     PageClientComponent,
     PageContainersComponent,
-    PageProfileComponent
+    PageProfileComponent,
+    PagePaysComponent
   ],
   imports: [
     CommonModule,

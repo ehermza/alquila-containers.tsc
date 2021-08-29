@@ -1,0 +1,61 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">
+        <h3 class="text-center">Registro de Pagos</h3>
+    </div>
+
+    <div class="card-body">
+        <!-- <form action="/pagos/add" method="POST"> -->
+        <form (ngSubmit)="onSubmit()" [formGroup]="formAddPay">
+            <div class="input-group mb-3">
+                <select class="form-select" formControlName="client" [(ngModel)]="model.client">
+                    <option selected [value]="">Seleccionar Cliente</option>
+                    <!-- <% containers.forEach(function(ctdor) { 
+                            let strclient= getstring(ctdor.id_container, ctdor.rented_by) %>
+                            <option value=<%= mostrar(ctdor.id_container, ctdor.rented_by_id, strclient); %>>
+                                <%= strclient %>
+                            </option>
+                            <% }); %> -->
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text"> Importe</span>
+                <input type="number" class="form-control" placeholder="0.00" [(ngModel)]="model.value"
+                    formControlName="value">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text"> Recibo N°</span>
+                <input type="text" class="form-control" placeholder="000" [(ngModel)]="model.recibo_n"
+                    formControlName="recibo_n">
+            </div>
+            <button class="btn btn-block btn-primary" type="submit" id="btn-addpay">ACEPTAR</button>
+
+        </form>
+    </div>
+</div>
+<div>
+    <div class="card border-warning">
+        <div class="card-header">
+            <h5 class="text-center text-warning">Registrar nuevo periodo</h5>
+        </div>
+        <div class="card-body">
+            <!-- 
+                <form action="/deuda/charge" method="GET">
+                    <div class="input-group mb-3">
+                        <select formControlName="per" class="form-select" id="period">
+                            <option selected>Elegir Periodo</option>
+                            <% let array_meses=process.env.STR_MESES.split(','); 
+                                for(var i=0; i< array_meses.length; i++) { %>
+                                <option value="<%= array_meses[i] %>">
+                                    <%= array_meses[i] %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <button class="btn btn-block btn-outline-warning" type="submit"
+                        id="btn-deudacharge">NUEVO PERIODO</button>
+
+            </div>
+            </form> 
+        -->
+        </div>
+    </div>

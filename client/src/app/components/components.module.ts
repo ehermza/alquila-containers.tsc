@@ -11,6 +11,8 @@ import { TableComponent } from './clients/table/table.component';
 import { FormAddClientComponent } from './clients/form-add-client/form-add-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './alert/alert.component';
+import { FormAddPayComponent } from './pagos/form-add-pay/form-add-pay.component';
+import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AlertComponent } from './alert/alert.component';
     FormClientComponent,
     FormContainerComponent,
     AlertComponent,
+    FormAddPayComponent,
+    TablePaysComponent,
 
   ],
   imports: [
