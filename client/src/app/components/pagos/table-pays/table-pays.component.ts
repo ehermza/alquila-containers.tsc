@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PagoService } from 'src/app/services/pago.service';
 
 @Component({
   selector: 'app-table-pays',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablePaysComponent implements OnInit {
 
-  constructor() { }
+  dataSource:any = [];
+  displayedColumns: string[] = ['client_name','value','recibo_n','paid_at'];
+  
+  constructor(
+    private pagoService:PagoService
+  ) { }
 
   ngOnInit(): void {
+    this.dataSource = this.pagoService.getPagosAll();
   }
+  
 
 }

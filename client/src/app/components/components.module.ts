@@ -41,6 +41,10 @@ import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
     TableComponent,
     FormContainerComponent,
     FormClientComponent,
+
+    FormAddPayComponent,  // page-pays
+    TablePaysComponent,   // page-pays
+
     AlertComponent
   ]
 })

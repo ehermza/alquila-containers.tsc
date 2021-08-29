@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'containers', component: PageProfileComponent },
   { path: 'containers/edit/:id', component: PageProfileComponent },
 
-  {path:'pays',component: PagePaysComponent }
+  {path:'pagos',component: PagePaysComponent },
 
   { path: '**', pathMatch: 'full', redirectTo: 'clients' }
 ];
