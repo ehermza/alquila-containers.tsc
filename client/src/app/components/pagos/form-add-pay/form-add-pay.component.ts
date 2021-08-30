@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // import { Contenedor } from 'src/app/models/Contenedor';
 import { Pago } from 'src/app/models/Pago';
@@ -21,9 +21,11 @@ export class FormAddPayComponent implements OnInit {
   ) { }
   
   formAddPay = new FormGroup({
-    objclient: new FormControl(),
-    value: new FormControl(),
-    recibo_n: new FormControl()
+    client: new FormControl('',Validators.required),
+    value: new FormControl ('', Validators.pattern(/^[0-9]*$/)),
+    // recibo_n: new FormControl(),
+    recibo_n: new FormControl ('', Validators.pattern(/^[0-9]*$/)),
+
   });
 
   ngOnInit(): void {
