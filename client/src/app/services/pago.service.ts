@@ -14,4 +14,8 @@ export class PagoService {
   getPagosAll() {
     return this.http.get('/api/pagos/');
   }
+
+  createPago(body:any){
+    return this.http.post('/api/pagos/', body);
+  }
 }

@@ -11,7 +11,7 @@
                 <select class="form-select" formControlName="client" [(ngModel)]="model.client">
                     <option selected value="">Seleccionar Cliente</option>
                     <option *ngFor= "let ctner of dataSource;" [value]="ctner._id">
-                        {{ctner.id_container}}.- {{ctner.rented_by}}
+                        {{ctner.id_container}}. {{ctner.rented_by}}
                     </option>
                 </select>
             </div>

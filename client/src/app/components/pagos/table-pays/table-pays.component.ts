@@ -16,7 +16,7 @@ import { PagoService } from 'src/app/services/pago.service';
 export class TablePaysComponent implements OnInit {
 
   dataSource:any = [];
-  displayedColumns: string[] = ['client_name','value','recibo_n','paid_at'];
+  displayedColumns: string[] = ['paid_at','client_name','value','recibo_n'];
   
   constructor(
     private pagoService:PagoService

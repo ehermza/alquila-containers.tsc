@@ -10,7 +10,7 @@ import { FormContainerComponent } from './form-container/form-container.componen
 import { TableComponent } from './clients/table/table.component';
 import { FormAddClientComponent } from './clients/form-add-client/form-add-client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AlertComponent } from './alert/alert.component';
+// import { AlertComponent } from './alert/alert.component';
 import { FormAddPayComponent } from './pagos/form-add-pay/form-add-pay.component';
 import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
 
@@ -21,7 +21,7 @@ import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
     TableComponent,
     FormClientComponent,
     FormContainerComponent,
-    AlertComponent,
+    // AlertComponent,
     FormAddPayComponent,
     TablePaysComponent,
 
@@ -44,8 +44,7 @@ import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
 
     FormAddPayComponent,  // page-pays
     TablePaysComponent,   // page-pays
-
-    AlertComponent
+    // AlertComponent
   ]
 })
 export class ComponentsModule { }

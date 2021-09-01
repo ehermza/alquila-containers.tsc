@@ -11,4 +11,12 @@ export class Pago
     client_name?: string;
 
     constructor() {}
+
+    setClientName(nombre:string) {
+        this.client_name= nombre;
+    }
+
+    getIdClient() {
+        return this.client;
+    }
 }
