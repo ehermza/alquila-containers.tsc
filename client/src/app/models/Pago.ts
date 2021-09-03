@@ -1,4 +1,16 @@
 
+export interface Pago 
+{
+    client: string ;
+    value?: Number;
+    month_paid: string;
+    paid_at: Date;
+    paid_str: string;
+    id_container: Number;
+    recibo_n?: string;
+    client_name?: string;
+}
+
 export class Pago 
 {
     client: string = "";
@@ -14,6 +26,10 @@ export class Pago
 
     setClientName(nombre:string) {
         this.client_name= nombre;
+    }
+    
+    setCtnerNumber(ctnerNumber:Number){
+        this.id_container = ctnerNumber;
     }
 
     getIdClient() {

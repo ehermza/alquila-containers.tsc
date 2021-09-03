@@ -1,0 +1,9 @@
+
+
+  To Correct:  /pagos
+[]    'Delete' button, Agregate!
+[]    Insert input 'period' for input the paid month. Placeholder value: the current month. 
+
+
+
+

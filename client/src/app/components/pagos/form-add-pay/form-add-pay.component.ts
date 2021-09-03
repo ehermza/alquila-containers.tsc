@@ -54,15 +54,52 @@ export class FormAddPayComponent implements OnInit {
       );
   }
 
+  SumarPagosTotal(res: any) 
+  {
+    const pagos: Array<Pago> = res;
+    var totalPayFromClient:Number = 0;
+    pagos.forEach(pago => {
+      if (pago.value!=null)
+      totalPayFromClient+= (pago.value);
+      }
+    )
+  }
+  //  getTotal(idClient:string, nCtner:Number) 
+  getTotal() {
+    const { client, id_container } = this.model;
+    this.pagoService.getPagoByClient(client, id_container)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          // const pagos:any = res;
+          this.SumarPagosTotal(res);
+        }
+      )
+
+    /*     
+      const pagos_client = await Pago.find(filter);
+    
+        let total = 0;
+        // console.log(filter);
+        pagos_client.forEach(function (pago) {
+            total += parseInt(pago.value);
+    
+        });
+        console.log(`PAGOS, Total Container: ${id_ctdor}: ${total}`);
+        return total;
+     */
+  }
+
   onSubmit() {
     const id = this.model.getIdClient();
     this.containerService.getContainerOne(id)
       .subscribe(
         (res) => {
           const ctner: any = res;   // Container class.
-          this.model.setClientName(ctner.rented_by);
-          // this.clientName = ctner.rented_by;
-          this.insertPagotoDB()
+          this.model.setClientName(ctner.rented_by);      // Set Client name from Ctner class
+          this.model.setCtnerNumber(ctner.id_container);  // ctner number from Container class
+          this.insertPagotoDB();
+          this.getTotal();
         }
       )
   }
@@ -70,7 +107,6 @@ export class FormAddPayComponent implements OnInit {
   insertPagotoDB() {
     console.log(this.model);
 
-    // this.model.setClientName()
     this.pagoService.createPago(this.model)
       .subscribe(
         (res) => {

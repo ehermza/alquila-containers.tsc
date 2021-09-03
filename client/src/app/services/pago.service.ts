@@ -18,4 +18,8 @@ export class PagoService {
   createPago(body:any){
     return this.http.post('/api/pagos/', body);
   }
+
+  getPagoByClient(idClient:string, nCtner:Number) {
+    return this.http.get(`/api/pagos/${idClient}&${nCtner}`);
+  }
 }
