@@ -2,7 +2,7 @@
 export interface Pago 
 {
     client: string ;
-    value?: Number;
+    value?: number;
     month_paid: string;
     paid_at: Date;
     paid_str: string;
@@ -14,7 +14,7 @@ export interface Pago
 export class Pago 
 {
     client: string = "";
-    value?: Number;
+    value?: number;
     month_paid: string = "";
     paid_at: Date = new Date();
     paid_str: string= '';

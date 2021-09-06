@@ -26,7 +26,7 @@ export class PageProfileComponent implements OnInit
       // this.idctner = ver;  deprecated!
       this.getContainer(idByUrl);
     }
-    console.log(`(PageProfile) container: ${this.container}`);
+    // console.log(`(PageProfile) container: ${this.container}`);
   }
 
   setClient(idclient:string) {
@@ -34,7 +34,8 @@ export class PageProfileComponent implements OnInit
       .subscribe(
         (res) => {
           this.client = res;
-          console.log(`(PageProfile) Client: ${this.client}`);
+          console.log('CLIENTE by PageProfile: ', res);
+          // console.log(`(PageProfile) Client: ${this.client}`);
         },
         (err) => console.log(err)
       ) 
@@ -47,7 +48,8 @@ export class PageProfileComponent implements OnInit
          (res) => {
           this.container = res;
 			  console.log(this.container);
-          this.setClient(this.container.rented_by_id);
+        const currentClient= this.container.rented_by_id;
+          this.setClient(currentClient);
         },
          (err) => console.error(err)
       );

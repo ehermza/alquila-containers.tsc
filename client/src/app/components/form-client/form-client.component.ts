@@ -33,8 +33,20 @@ export class FormClientComponent implements OnInit {
     name:new FormControl('',Validators.required), 
     telephone: new FormControl(),
     business: new FormControl(),
-    saldo_act: new FormControl()
-  })
+    pagos_total: new FormControl(),
+    saldo_act: new FormControl(
+      // this.getSaldoActual()
+    ),
+  });
+
+  getSaldoActual():number
+   {
+    const {pagos_total, deuda_total} = this.CLIENT;
+    // console.log('get current by client-form: ', this.model) 
+    const difer = pagos_total - deuda_total;
+    console.log(`get saldo actual: ${difer} `);
+    return difer;
+  }
 
   ngOnChanges(changes: SimpleChanges) 
   {
@@ -42,16 +54,14 @@ export class FormClientComponent implements OnInit {
     if (idstr== ''|| ! idstr) return;
 
     if (!this.submitted) {
-      this.model.setId(this.CLIENT._id);
-      this.idclient = idstr;
       this.submitted = true;
+      // this.model.setId(this.CLIENT._id);
+      this.idclient = idstr;
+      
     }
-    
-    this.model.setAtributtes(
-      this.CLIENT.name,this.CLIENT.telephone,this.CLIENT.DNI,this.CLIENT.business,true
-    );
-
-    console.log("ngOnChanges(): ", this.model);
+    this.model = this.CLIENT;
+    // this.formClient.   // continue..!
+    // console.log("ngOnChanges(): ", this.model);
   }
 
   ngOnInit(): void {

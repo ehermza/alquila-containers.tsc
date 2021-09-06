@@ -7,9 +7,9 @@ import { Container } from 'src/app/models/container';
 // import { Contenedor } from 'src/app/models/Contenedor';
 import { Pago } from 'src/app/models/Pago';
 
+import { ClientService } from 'src/app/services/client.service';
 import { ContainersService } from 'src/app/services/containers.service';
 import { PagoService } from 'src/app/services/pago.service';
-
 
 
 @Component({
@@ -26,6 +26,7 @@ export class FormAddPayComponent implements OnInit {
 
   constructor(
     private containerService: ContainersService,
+    private clientService: ClientService,
     private pagoService: PagoService,
     private router: Router
   ) { }
@@ -54,40 +55,38 @@ export class FormAddPayComponent implements OnInit {
       );
   }
 
-  SumarPagosTotal(res: any) 
+  SumarPagosTotal(res: any, idclient: string) 
   {
     const pagos: Array<Pago> = res;
-    var totalPayFromClient:Number = 0;
+    var totalPayFromClient: number = 0;
+
     pagos.forEach(pago => {
-      if (pago.value!=null)
-      totalPayFromClient+= (pago.value);
-      }
-    )
+      /** Calculate total pagos by client & container number, */
+      if (pago.value != null)
+        totalPayFromClient += (pago.value);
+    });
+    /** Update total-pagos property (client object) */
+    const filter: any = { pagos_total: totalPayFromClient };
+    this.clientService.updateClient(idclient, filter)
+      .subscribe(
+        (res) => console.log('`Client updated succesfully! But at. with value total_pagos`'),
+        (err) => console.log('ERROR: I can\'t update total_pagos property (client object)')
+      )
+    console.log(`**SumarPagosTotal(): ${totalPayFromClient}`);
   }
-  //  getTotal(idClient:string, nCtner:Number) 
+
   getTotal() {
     const { client, id_container } = this.model;
     this.pagoService.getPagoByClient(client, id_container)
       .subscribe(
+        /*  EHER: Sept 05th, 2021
+         *  Get total pays of client by container number. 
+         */
         (res) => {
           console.log(res);
-          // const pagos:any = res;
-          this.SumarPagosTotal(res);
+          this.SumarPagosTotal(res, client);
         }
-      )
-
-    /*     
-      const pagos_client = await Pago.find(filter);
-    
-        let total = 0;
-        // console.log(filter);
-        pagos_client.forEach(function (pago) {
-            total += parseInt(pago.value);
-    
-        });
-        console.log(`PAGOS, Total Container: ${id_ctdor}: ${total}`);
-        return total;
-     */
+      );
   }
 
   onSubmit() {
@@ -96,8 +95,8 @@ export class FormAddPayComponent implements OnInit {
       .subscribe(
         (res) => {
           const ctner: any = res;   // Container class.
-          this.model.setClientName(ctner.rented_by);      // Set Client name from Ctner class
-          this.model.setCtnerNumber(ctner.id_container);  // ctner number from Container class
+          this.model.setClientName(ctner.rented_by);      // Set Client name TO MODEL(Pago)
+          this.model.setCtnerNumber(ctner.id_container);  // Set ctner number TO MODEL(Pago)
           this.insertPagotoDB();
           this.getTotal();
         }

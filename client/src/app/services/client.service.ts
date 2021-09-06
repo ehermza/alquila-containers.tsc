@@ -17,4 +17,9 @@ export class ClientService {
     return this.http.post('/api/clients/', body);
     
   }
+
+  updateClient(idclient: string, body:any) {
+    // return this.http.put('/api/clients/', body);
+    return this.http.put(`/api/clients/${idclient}`, body);
+  }
 }
