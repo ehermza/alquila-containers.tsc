@@ -34,13 +34,15 @@ export class FormClientComponent implements OnInit {
     telephone: new FormControl(),
     business: new FormControl(),
     pagos_total: new FormControl(),
-    saldo_act: new FormControl(
-      // this.getSaldoActual()
-    ),
+    saldo_act: new FormControl(),
   });
 
   getSaldoActual():number
-   {
+  {
+     /**
+      * deprecated! urgent to correct, 
+      * este dato deberia obtenerse from Rental model
+      */
     const {pagos_total, deuda_total} = this.CLIENT;
     // console.log('get current by client-form: ', this.model) 
     const difer = pagos_total - deuda_total;

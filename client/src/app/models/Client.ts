@@ -21,23 +21,7 @@ export class Client {
     public setAtributtes(nameClient:string) {
         this.name = nameClient;
     }
-/*     public setAtributtes(
-        name: string,
-        phone?: string,
-        DNI?: string,
-        business?: string,
-        active?: boolean,
-        debe?: number,
-        haber?: number
-    ) {
-        this.name = name;
-        this.telephone = phone;
-        this.business = business;
-        this.active = active;
-        this.deudas_total = debe;
-        this.pagos_total = haber;
-    }
- */
+
     public setTotalPagos(importe: number) {
         this.pagos_total = importe;
     }
