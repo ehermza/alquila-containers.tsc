@@ -1,6 +1,6 @@
 
 export class Client {
-    public _id: string = '';
+    public _id: string;
     public name: string = '';
     public telephone?: string;
     public DNI?: string;
@@ -11,6 +11,7 @@ export class Client {
 
     // constructor(idclient:string) { 
     constructor(isActive?: boolean) {
+        this._id = '';
         this.active = isActive;
     }
 

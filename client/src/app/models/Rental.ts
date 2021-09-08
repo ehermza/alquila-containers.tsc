@@ -46,9 +46,9 @@ export class Rental {
     }
 
 
-    insertDeuda(importe: number, fecha: Date, per: String): Boolean 
+    insertDeuda(importe: number, fecha: Date, per: String): number 
     {
-        if(!this.active) return false;
+        if(!this.active) return -1;
 
         const deuda: RgtDeuda = {
             value: importe,
@@ -57,26 +57,25 @@ export class Rental {
         this.deuda_register.push(deuda);
         this.deuda_total += importe;
 
-        return true;
-        // return this.deuda_total - this.pagos_total;
+        // return true;
+        return (this.deuda_total - this.pagos_total);
     }
 
-    insertPayment(importe: number, fecha: Date, per: String, recibo?:String): Boolean
+    insertPayment(importe: number, fecha: Date, per: String, recibo?:String): number
     {
-        if(!this.active) return false;
+        if(!this.active) return -1;
 
         const pago: RgtPago = {
             value: importe,
             period: per,
             paid_at: fecha,
-            recibo_n: (recibo!= undefined)? recibo: ''
+            recibo_n: (recibo!= undefined)? recibo: "",
         }
         this.pagos_register.push(pago);
         this.pagos_total+= importe;
 
-        return true;
-        // return (this.deuda_total - this.pagos_total);
-
+        // return true;
+        return (this.deuda_total - this.pagos_total);
     }
     
 }

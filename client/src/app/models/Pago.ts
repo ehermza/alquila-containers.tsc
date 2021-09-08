@@ -10,7 +10,9 @@ export interface Pago
     recibo_n?: string;
     client_name?: string;
 }
-
+/**
+ * class deprecated! urgent: delete it
+ */
 export class Pago 
 {
     client: string = "";

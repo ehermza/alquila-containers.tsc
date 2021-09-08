@@ -1,11 +1,9 @@
-// import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Container } from 'src/app/models/container';
 
-// import { Contenedor } from 'src/app/models/Contenedor';
-import { Pago } from 'src/app/models/Pago';
+import { Client } from 'src/app/models/Client';
+import { Contenedor } from 'src/app/models/Contenedor';
 
 import { ClientService } from 'src/app/services/client.service';
 import { ContainersService } from 'src/app/services/containers.service';
@@ -19,10 +17,12 @@ import { PagoService } from 'src/app/services/pago.service';
 })
 export class FormAddPayComponent implements OnInit {
 
-  // list:any= [];
   dataSource: any = [];
-  model: Pago = new Pago();
-  clientName: string = '';
+//   model: Pago = new Pago();
+    model: any = {};
+    idClient: string = '-1';
+    clientName: string = '';      // delete!
+    container: Contenedor|null = null;
 
   constructor(
     private containerService: ContainersService,
@@ -32,11 +32,10 @@ export class FormAddPayComponent implements OnInit {
   ) { }
 
   formAddPay = new FormGroup({
-    client: new FormControl('', Validators.required),
+    container: new FormControl('', Validators.required),
     value: new FormControl('', Validators.pattern(/^[0-9]*$/)),
     // recibo_n: new FormControl(),
     recibo_n: new FormControl('', Validators.pattern(/^[0-9]*$/)),
-
   });
 
   ngOnInit(): void {
@@ -54,70 +53,45 @@ export class FormAddPayComponent implements OnInit {
         (err) => console.error(err)
       );
   }
+  getTotal() {}
+  insertPagotoDB() {}
 
-  SumarPagosTotal(res: any, idclient: string) 
+  setClientProperty() {
+      if(this.container==null) return;
+
+      this.idClient = this.container.rented_by_id;
+  }
+
+  findContainer(id:String) 
   {
-    const pagos: Array<Pago> = res;
-    var totalPayFromClient: number = 0;
-
-    pagos.forEach(pago => {
-      /** Calculate total pagos by client & container number, */
-      if (pago.value != null)
-        totalPayFromClient += (pago.value);
-    });
-    /** Update total-pagos property (client object) */
-    const filter: any = { pagos_total: totalPayFromClient };
-    this.clientService.updateClient(idclient, filter)
-      .subscribe(
-        (res) => console.log('`Client updated succesfully! But at. with value total_pagos`'),
-        (err) => console.log('ERROR: I can\'t update total_pagos property (client object)')
-      )
-    console.log(`**SumarPagosTotal(): ${totalPayFromClient}`);
-  }
-
-  getTotal() {
-    const { client, id_container } = this.model;
-    this.pagoService.getPagoByClient(client, id_container)
-      .subscribe(
-        /*  EHER: Sept 05th, 2021
-         *  Get total pays of client by container number. 
-         */
-        (res) => {
-          console.log(res);
-          this.SumarPagosTotal(res, client);
-        }
-      );
-  }
-
-  onSubmit() {
-    const id = this.model.getIdClient();
+    /**
+     * deprecated! 
+     */
     this.containerService.getContainerOne(id)
       .subscribe(
         (res) => {
-          const ctner: any = res;   // Container class.
-          this.model.setClientName(ctner.rented_by);      // Set Client name TO MODEL(Pago)
-          this.model.setCtnerNumber(ctner.id_container);  // Set ctner number TO MODEL(Pago)
-          this.insertPagotoDB();
-          this.getTotal();
+            const obj:any = res;
+            this.container = obj;
+            console.log("cliente object: ", this.container);
+            this.setClientProperty();
         }
       )
+
   }
-
-  insertPagotoDB() {
-    console.log(this.model);
-
+  onSubmit() {
+    // const id = this.model.getIdClient();
+    const idCtner = this.model.container;
+    console.log("id container: ", this.model.container);
+    // this.findContainer(idCtner);
     this.pagoService.createPago(this.model)
-      .subscribe(
-        (res) => {
-          this.router.navigateByUrl('/clients/alert/210');
-          // this.router.navigate(['/clients/alert/210'])
-
-        },
-        (err) => console.log('ERROR! ', err)
-      )
+    .subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    )
   }
+
 }
 
 function filtrar(objeto: any) {
-  return (objeto.active);
-}
+    return (objeto.active);
+  }
