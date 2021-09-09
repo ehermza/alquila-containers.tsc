@@ -1,13 +1,25 @@
 
-export class Client {
-    public _id: string;
-    public name: string = '';
-    public telephone?: string;
-    public DNI?: string;
-    public business?: string;
-    public active?: boolean;
-    public deudas_total: number = 0;
-    public pagos_total: number = 0;
+export interface Client {
+    name: string;
+    telephone?: string;
+    DNI?: string;
+    business?: string;
+    active?: boolean;
+    deuda_total: number;
+    pagos_total: number;
+    rent_info: [];
+}
+
+export class Client 
+{
+     _id: string;
+     name: string = '';
+     telephone?: string;
+     DNI?: string;
+     business?: string;
+     active?: boolean;
+     deudas_total: number = 0;
+     pagos_total: number = 0;
 
     // constructor(idclient:string) { 
     constructor(isActive?: boolean) {

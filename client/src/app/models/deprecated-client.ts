@@ -1,5 +1,5 @@
 
-export interface Client {
+/* export interface Client {
     name: string;
     telephone: string;
     DNI: string;
@@ -9,7 +9,7 @@ export interface Client {
     pagos_total: Number;
     rent_info: [];
 }
-
+ */
 // const { Schema, model } = require('mongoose');
 
 // const ClientSchema = new Schema({

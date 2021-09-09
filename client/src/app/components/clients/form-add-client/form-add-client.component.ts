@@ -5,6 +5,7 @@ import { Client } from 'src/app/models/Client';
 import { Contenedor } from 'src/app/models/Contenedor';
 
 import { ClientService } from 'src/app/services/client.service';
+import { RentalService } from 'src/app/services/rental.service';
 import { ContainersService } from '../../../services/containers.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class FormAddClientComponent implements OnInit {
     // private fb: FormBuilder,    // for validate form
     private ctnerService: ContainersService,
     private clientService: ClientService,
+    private alquilerService: RentalService,
     private http: HttpClient
   ) { }
 
@@ -59,30 +61,56 @@ export class FormAddClientComponent implements OnInit {
         }
       );
   }
-  /*  
-   *   Add new client and link to Container
-   */
-  linkClientByCtner() {
-    console.log('(form-add-client) id container identified: ', this.idCtner);
-    console.log('(form-add-client) id client created: ', this.idClient);
-    this.model.rented_by_id = this.idClient;
 
+  createAlquilerObj() 
+  {
+    /**
+     * Insert Rental to Server: POST /api/rental/
+     */
+     const keys = {
+      "ptr_client": this.idClient,
+      "ptr_ctner" : this.idCtner
+    }
+    this.alquilerService.createRentalService(keys)
+      .subscribe(
+        res => {
+          console.log(res)
+        },
+        (err) => console.log(err)
+      ) 
+  }
+
+  linkClientByCtner()
+   {
+    console.log('(form-add-client) id ctner identified: ', this.idCtner);
+    console.log('(form-add-client) id client created: ', this.idClient);
+
+    this.model.rented_by_id = this.idClient;
+    /**
+     * Update container to Server: PUT /api/containers/:id
+     */
     this.ctnerService.setClient(this.idCtner, this.model)
       .subscribe(
-        (res) => console.log(res),
+        (res) => {
+          console.log( 'CtnerService.setClient() ', res);
+          this.createAlquilerObj();
+        } ,
         (err) => console.log(err)
       );
   }
 
   addClient() {
-    const client: Client = new Client(true);
-    const clientname: string = this.model.rented_by;
-    client.setAtributtes(clientname);
+    const client: Client = new Client(true);          // nuevo client obj
+    const clientname: string = this.model.rented_by;  // extraigo client name del form
+    client.setAtributtes(clientname);                 //  ...lo asigno al client obj.
+    /**
+      Insert New Client to Server: POST /api/clients/ 
+     */
     this.clientService.createClient(client).subscribe(
       (data) => {
         console.log('this.clientService.createClient: ', data);
         const obj: any = data;
-        this.idClient = obj._id;
+        this.idClient = obj._id;      // get _id client
         this.linkClientByCtner();
       },
       (err) => { console.log(err); }

@@ -5,5 +5,12 @@
 []    Insert input 'period' for input the paid month. Placeholder value: the current month. 
 
 
+[]   ngOnChange() dont work like ends charge page.
+
+[]  To Create the client, must to call service to create the new Rental object on database,
 
 
+export async function createAlquilerCtrl(req:Request,res:Response) 
+{
+        const {idclient, idctner, fecha} = req.body;
+}

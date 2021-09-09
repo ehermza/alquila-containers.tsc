@@ -7,7 +7,9 @@ import { Contenedor } from 'src/app/models/Contenedor';
 
 import { ClientService } from 'src/app/services/client.service';
 import { ContainersService } from 'src/app/services/containers.service';
-import { PagoService } from 'src/app/services/pago.service';
+import { RentalService } from 'src/app/services/rental.service';
+
+// import { PagoService } from 'src/app/services/pago.service';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class FormAddPayComponent implements OnInit {
   constructor(
     private containerService: ContainersService,
     private clientService: ClientService,
-    private pagoService: PagoService,
+    private rentalService: RentalService,
     private router: Router
   ) { }
 
@@ -83,8 +85,9 @@ export class FormAddPayComponent implements OnInit {
     const idCtner = this.model.container;
     console.log("id container: ", this.model.container);
     // this.findContainer(idCtner);
-    this.pagoService.createPago(this.model)
-    .subscribe(
+    // this.pagoService.createPago(this.model)
+    this.rentalService.createPaymentService(this.model)
+      .subscribe(
       res => console.log(res),
       err => console.log(err)
     )
