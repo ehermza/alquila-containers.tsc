@@ -20,6 +20,9 @@ import { RentalService } from 'src/app/services/rental.service';
 export class FormAddPayComponent implements OnInit {
 
   dataSource: any = [];
+  dts: any = [];    // delete,
+  displayedColumns:string[] = ['paid_at','value','recibo_n'];
+
 //   model: Pago = new Pago();
     model: any = {};
     idClient: string = '-1';
@@ -93,6 +96,17 @@ export class FormAddPayComponent implements OnInit {
     )
   }
 
+  getPayments(){
+    // TEMPORAL! FOR TESTING
+    const {container} = this.model;
+    this.rentalService.getPaymentsByCtnerCtrl(container)
+      .subscribe(
+        (res) => {
+          const list:any= res;
+          this.dts = list;
+        }
+      )
+  }
 }
 
 function filtrar(objeto: any) {

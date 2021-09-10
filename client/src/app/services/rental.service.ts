@@ -15,7 +15,11 @@ export class RentalService {
   }
 
   createPaymentService(body:any){
-    return this.http.post('/api/rental/pago/', body);
+    return this.http.post('/api/rental/pagos/', body);
+  }
+
+  getPaymentsByCtnerCtrl(idCtner:string) {
+    return this.http.get(`/api/rental/pagos/${idCtner}`);
   }
 
 }
