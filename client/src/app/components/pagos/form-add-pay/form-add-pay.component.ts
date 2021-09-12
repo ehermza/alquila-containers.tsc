@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { format } from 'date-fns';
+
 
 import { Client } from 'src/app/models/Client';
 import { Contenedor } from 'src/app/models/Contenedor';
@@ -96,6 +98,12 @@ export class FormAddPayComponent implements OnInit {
     )
   }
 
+  print(){
+    const {container} = this.model;
+    // this.rentalService.getPaymentsByCtnerCtrl()
+    this.rentalService.getPaymentsByCtnerCtrl(container);
+  }
+/*   
   getPayments(){
     // TEMPORAL! FOR TESTING
     const {container} = this.model;
@@ -107,8 +115,17 @@ export class FormAddPayComponent implements OnInit {
         }
       )
   }
+ */
 }
 
 function filtrar(objeto: any) {
     return (objeto.active);
+  }
+
+  function formatDate(objeto:any)
+   {
+    const dt= new Date(objeto.paid_at);
+    console.log(dt);
+    objeto.paid_str = format(dt, 'dd/MM/yyyy');
+    return objeto;
   }

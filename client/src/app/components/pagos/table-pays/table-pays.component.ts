@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 import { Pago } from 'src/app/models/Pago';
 
 import { PagoService } from 'src/app/services/pago.service';
+import { RentalService } from 'src/app/services/rental.service';
 
 
 @Component({
@@ -16,20 +17,15 @@ import { PagoService } from 'src/app/services/pago.service';
 export class TablePaysComponent implements OnInit {
 
   dataSource:any = [];
-  displayedColumns: string[] = ['paid_at','client_name','value','recibo_n'];
+  displayedColumns: string[] = ['paid_at','period','value','recibo_n'];
   
   constructor(
-    private pagoService:PagoService
+    private pagoService:PagoService, 
+    public rentalService:RentalService
   ) { }
 
   ngOnInit(): void {
-    this.pagoService.getPagosAll().subscribe(
-      (res)=> {
-         const list:any = res;
-        this.dataSource = list.map(filtrar);
-      }
-    );
-    
+    // this.getData();
   }
   
   printdate(date:string){
