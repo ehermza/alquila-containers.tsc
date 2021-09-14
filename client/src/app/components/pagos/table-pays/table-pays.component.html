@@ -1,3 +1,4 @@
+
 <table mat-table [dataSource]="this.rentalService.pagos" style="min-width: 30rem;" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -16,11 +17,17 @@
     </ng-container>
   
     <!-- Name Column -->
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef> Cliente </th>
+      <td mat-cell *matCellDef="let element" align="right" > $ {{element.client}}.- </td>
+    </ng-container>
+
+    <!-- Name Column -->
     <ng-container matColumnDef="value">
       <th mat-header-cell *matHeaderCellDef> Importe </th>
       <td mat-cell *matCellDef="let element" align="right" > $ {{element.value}}.- </td>
     </ng-container>
-  
+
     <!-- Weight Column -->
     <ng-container matColumnDef="recibo_n">
       <th mat-header-cell *matHeaderCellDef align="right"> Recibo N° </th>
@@ -38,4 +45,3 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  

@@ -11,6 +11,7 @@ import { RgtPago } from '../models/Rental';
 export class RentalService 
 {
   public pagos:RgtPago[] = [];
+  public container:string = '';
 
   constructor(
     private http:HttpClient
@@ -33,9 +34,9 @@ export class RentalService
            const list:any = res;
           // this.dataSource = list.map(filtrar);
           this.pagos = list.map(formatDate);
+          this.container = idCtner;
         },
-        (err) =>
-        {
+        (err) => {
           this.pagos = [];
           console.log('EMPTY PAYMENT REGISTER');
         }

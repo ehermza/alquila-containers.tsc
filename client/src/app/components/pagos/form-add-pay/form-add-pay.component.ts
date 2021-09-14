@@ -23,13 +23,14 @@ export class FormAddPayComponent implements OnInit {
 
   dataSource: any = [];
   dts: any = [];    // delete,
-  displayedColumns:string[] = ['paid_at','value','recibo_n'];
+  // displayedColumns:string[] = ['paid_at','value','recibo_n'];
 
 //   model: Pago = new Pago();
     model: any = {};
     idClient: string = '-1';
-    clientName: string = '';      // delete!
     container: Contenedor|null = null;
+    readonly: Boolean= true;
+    clientname: string = 'empty';      // delete!
 
   constructor(
     private containerService: ContainersService,
@@ -38,8 +39,12 @@ export class FormAddPayComponent implements OnInit {
     private router: Router
   ) { }
 
-  formAddPay = new FormGroup({
+  formSelect = new FormGroup({
     container: new FormControl('', Validators.required),
+  });
+
+  formAddPayment = new FormGroup({
+    // container: new FormControl('', Validators.required),
     value: new FormControl('', Validators.pattern(/^[0-9]*$/)),
     // recibo_n: new FormControl(),
     recibo_n: new FormControl('', Validators.pattern(/^[0-9]*$/)),
@@ -55,7 +60,8 @@ export class FormAddPayComponent implements OnInit {
         (res) => {
           const list: any = res;
           this.dataSource = list.filter(filtrar);
-          // console.log(this.games);
+          this.model.container = "";
+          // console.log(this.dataSource);
         },
         (err) => console.error(err)
       );
@@ -100,8 +106,13 @@ export class FormAddPayComponent implements OnInit {
 
   print(){
     const {container} = this.model;
+    console.log
     // this.rentalService.getPaymentsByCtnerCtrl()
     this.rentalService.getPaymentsByCtnerCtrl(container);
+    this.readonly = false;
+    // console.log(this.container?.rented_by)
+    // this.clientname = (this.container == null)? "": this.container.rented_by;
+    this.clientname =  "perolaputamadre!"
   }
 /*   
   getPayments(){

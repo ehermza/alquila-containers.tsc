@@ -1,65 +1,58 @@
-
 <div class="card border-primary mb-3">
     <div class="card-header">
-        <h3 class="text-center">Registro de Pagos</h3>
+        <h5 class="text-center text-primary">Registro de Pagos</h5>
     </div>
 
     <div class="card-body">
         <!-- <form action="/pagos/add" method="POST"> -->
-        <form (ngSubmit)="print()" [formGroup]="formAddPay">
+        <form (ngSubmit)="print()" [formGroup]="formSelect">
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="container" [(ngModel)]="model.container">
                     <option selected value="">Seleccionar Cliente</option>
-                    <option *ngFor= "let ctner of dataSource;" [value]="ctner._id">
+                    <option *ngFor="let ctner of dataSource;" [value]="ctner._id">
                         {{ctner.id_container}}. {{ctner.rented_by}}
                     </option>
                 </select>
             </div>
+            <button class="btn btn-block btn-primary" [disabled]="!formSelect.valid" type="submit"
+                id="btn-select">MOSTRAR</button>
+        </form>
+    </div>
+
+</div>
+<div class="card border-primary mb-3" [hidden]="this.readonly" >
+        
+    <div class="card-header">
+        <h5 class="text-center text-primary"> Ingresar Nuevo Pago</h5>
+    </div>
+
+    <div class="card-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="formAddPayment">
+
+            <!-- <div class="input-group mb-3">
+                <span class="input-group-text"> Cliente</span>
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="model.client"
+                    formControlName="client" [readonly]="true" [value]="this.clientname" required>
+            </div> -->
             <div class="input-group mb-3">
                 <span class="input-group-text"> Importe</span>
                 <input type="number" class="form-control" placeholder="0.00" [(ngModel)]="model.value"
-                    formControlName="value" required>
+                    formControlName="value" [readonly]="this.readonly" required>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text"> Recibo N°</span>
                 <input type="text" class="form-control" placeholder="000" [(ngModel)]="model.recibo_n"
-                    formControlName="recibo_n">
+                    formControlName="recibo_n" [readonly]="this.readonly" >
             </div>
-            <button class="btn btn-block btn-primary" [disabled]="!formAddPay.valid" type="submit" id="btn-addpay">ACEPTAR</button>
+            <button class="btn btn-block btn-info" [disabled]="!formAddPayment.valid" type="submit"
+                id="btn-addpay">AGREGAR PAGO</button>
 
         </form>
     </div>
+
 </div>
+
 {{model|json}}
-
-<table mat-table [dataSource]="dts" style="min-width: 30rem;" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="paid_at">
-      <th mat-header-cell *matHeaderCellDef> Fecha </th>
-      <td mat-cell *matCellDef="let element" align="left"> {{element.paid_at}} </td>
-    </ng-container>
-    
-    <!-- Name Column -->
-    <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef> Importe </th>
-      <td mat-cell *matCellDef="let element" align="right" > $ {{element.value}}.- </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="recibo_n">
-      <th mat-header-cell *matHeaderCellDef align="right"> Recibo N° </th>
-      <td mat-cell *matCellDef="let element" align="right"> R. 0{{element.recibo_n}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
-  
 
 <div>
     <div class="card border-warning">
