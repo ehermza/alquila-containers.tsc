@@ -75,32 +75,18 @@ export class FormAddPayComponent implements OnInit {
       this.idClient = this.container.rented_by_id;
   }
 
-  findContainer(id:String) 
-  {
-    /**
-     * deprecated! 
-     */
-    this.containerService.getContainerOne(id)
-      .subscribe(
-        (res) => {
-            const obj:any = res;
-            this.container = obj;
-            console.log("cliente object: ", this.container);
-            this.setClientProperty();
-        }
-      )
-
+  alert(idurl:number) {
+    this.router.navigate([`clients/alert/${idurl}`]);
   }
+
   onSubmit() {
     // const id = this.model.getIdClient();
     const idCtner = this.model.container;
     console.log("id container: ", this.model.container);
-    // this.findContainer(idCtner);
-    // this.pagoService.createPago(this.model)
     this.rentalService.createPaymentService(this.model)
       .subscribe(
-      res => console.log(res),
-      err => console.log(err)
+        res => alert(210),
+        err => alert(440)
     )
   }
 

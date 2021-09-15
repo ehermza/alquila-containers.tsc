@@ -68,11 +68,20 @@ export class NavigatorComponent implements OnInit {
       case '210':
         objeto = {
           title: 'Pago ingresado',
-          text: 'El registro fue cargado con éxito.',
+          text: 'Registro de pago cargado a la base de datos.',
           icon: 'success',
           timer: MSTIMER
         }
         break;
+      case '440':
+        objeto = {
+          title: "Error al insertar pago",
+          text: "Es posible que no haya conexión con la base de datos.",
+          icon: 'error',
+          timer: undefined
+        }
+        break;
+  
       default:
     };
     if (alertNumber != null) fireSwalError(objeto);

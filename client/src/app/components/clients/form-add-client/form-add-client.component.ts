@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { Contenedor } from 'src/app/models/Contenedor';
 
 import { ClientService } from 'src/app/services/client.service';
 import { RentalService } from 'src/app/services/rental.service';
 import { ContainersService } from '../../../services/containers.service';
+
 
 @Component({
   selector: 'app-form-add-client',
@@ -26,6 +28,7 @@ export class FormAddClientComponent implements OnInit {
 
   constructor(
     // private fb: FormBuilder,    // for validate form
+    private router:Router,
     private ctnerService: ContainersService,
     private clientService: ClientService,
     private alquilerService: RentalService,
@@ -74,7 +77,9 @@ export class FormAddClientComponent implements OnInit {
     this.alquilerService.createRentalService(keys)
       .subscribe(
         res => {
-          console.log(res)
+//          console.log(res)
+        this.router.navigate(['/clients/alert/200']);
+
         },
         (err) => console.log(err)
       ) 
