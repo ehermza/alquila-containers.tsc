@@ -11,7 +11,8 @@ import { RgtPago } from '../models/Rental';
 export class RentalService 
 {
   public pagos:RgtPago[] = [];
-  public container:string = '';
+  public container:string = "";
+  public blEmptyTable:string = "";
 
   constructor(
     private http:HttpClient
@@ -25,20 +26,27 @@ export class RentalService
     return this.http.post('/api/rental/pagos/', body);
   }
 
+  getSaldoActual(idCtner:string)  {
+   return this.http.get<any>(`/api/rental/saldo/${ idCtner }`);
+  }
+
   getPaymentsByCtnerCtrl(idCtner:string)
    {
     // return this.http.get(`/api/rental/pagos/${idCtner}`);
     this.http.get(`/api/rental/pagos/${idCtner}`)
       .subscribe(
         (res)=> {
+          console.log(res);
            const list:any = res;
-          // this.dataSource = list.map(filtrar);
-          this.pagos = list.map(formatDate);
+          /**
+           * this.pagos set from form-add-pay then, is reading for table-pays */
+          this.pagos = list.map(formatDate);    
+          this.blEmptyTable = (!this.pagos.length)? "Not Payments": "";
           this.container = idCtner;
         },
         (err) => {
           this.pagos = [];
-          console.log('EMPTY PAYMENT REGISTER');
+          console.log('Failure to try get payments!');
         }
   
       );            

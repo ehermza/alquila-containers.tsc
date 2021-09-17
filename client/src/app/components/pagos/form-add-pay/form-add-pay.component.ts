@@ -75,7 +75,7 @@ export class FormAddPayComponent implements OnInit {
       this.idClient = this.container.rented_by_id;
   }
 
-  alert(idurl:number) {
+  alertar(idurl:number) {
     this.router.navigate([`clients/alert/${idurl}`]);
   }
 
@@ -85,12 +85,12 @@ export class FormAddPayComponent implements OnInit {
     console.log("id container: ", this.model.container);
     this.rentalService.createPaymentService(this.model)
       .subscribe(
-        res => alert(210),
-        err => alert(440)
+        res => this.alertar(210),
+        err => this.alertar(440)
     )
   }
 
-  print(){
+  printPaymentsOnTable(){
     const {container} = this.model;
     console.log
     // this.rentalService.getPaymentsByCtnerCtrl()
@@ -100,19 +100,6 @@ export class FormAddPayComponent implements OnInit {
     // this.clientname = (this.container == null)? "": this.container.rented_by;
     this.clientname =  "perolaputamadre!"
   }
-/*   
-  getPayments(){
-    // TEMPORAL! FOR TESTING
-    const {container} = this.model;
-    this.rentalService.getPaymentsByCtnerCtrl(container)
-      .subscribe(
-        (res) => {
-          const list:any= res;
-          this.dts = list;
-        }
-      )
-  }
- */
 }
 
 function filtrar(objeto: any) {

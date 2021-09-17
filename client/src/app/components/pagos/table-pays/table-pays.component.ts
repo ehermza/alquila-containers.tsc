@@ -17,8 +17,9 @@ import { RentalService } from 'src/app/services/rental.service';
 export class TablePaysComponent implements OnInit {
 
   dataSource:any = [];
-  displayedColumns: string[] = ['paid_at','period','value','recibo_n'];
-  
+  displayedColumns: string[] = ['paid_at','period','value','recibo_n', '_id'];
+  emptyAlertMsg:string = "";
+
   constructor(
     private pagoService:PagoService, 
     public rentalService:RentalService

@@ -5,7 +5,7 @@
 
     <div class="card-body">
         <!-- <form action="/pagos/add" method="POST"> -->
-        <form (ngSubmit)="print()" [formGroup]="formSelect">
+        <form (ngSubmit)="printPaymentsOnTable()" [formGroup]="formSelect">
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="container" [(ngModel)]="model.container">
                     <option selected value="">Seleccionar Cliente</option>
@@ -15,7 +15,7 @@
                 </select>
             </div>
             <button class="btn btn-block btn-primary" [disabled]="!formSelect.valid" type="submit"
-                id="btn-select">MOSTRAR</button>
+                id="btn-select">VER PAGOS</button>
         </form>
     </div>
 

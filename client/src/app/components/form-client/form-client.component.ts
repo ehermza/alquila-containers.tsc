@@ -3,9 +3,12 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { ClientService } from 'src/app/services/client.service';
+import { RentalService } from 'src/app/services/rental.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RgtPago } from 'src/app/models/Rental';
 
 @Component({
   selector: 'app-form-client',
@@ -19,14 +22,16 @@ export class FormClientComponent implements OnInit {
   submitted = false;
   idclient: string = '';
   urlpath: string = '';
+  saldoActual: number = -1;
 
   model: Client = new Client();
 
   constructor(
     // private route: ActivatedRoute,
     private router:Router,
+    private http: HttpClient,
     private clientService: ClientService,
-    private http: HttpClient
+    private rentalService: RentalService
   ) { }
 
   formClient = new FormGroup({
@@ -37,7 +42,7 @@ export class FormClientComponent implements OnInit {
     saldo_act: new FormControl(),
   });
 
-  getSaldoActual():number
+  i_getSaldoActual():number
   {
      /**
       * deprecated! urgent to correct, 
@@ -50,16 +55,27 @@ export class FormClientComponent implements OnInit {
     return difer;
   }
 
+  getSaldoActual() {
+    console.log("idclient of getsaldoactual: ", this.idclient);
+    this.rentalService.getSaldoActual(this.idclient)
+    .subscribe( res => {
+      const {saldo} = res;
+      this.saldoActual = saldo;
+      console.log('GETSALDOACTUAL: ', res);
+    });
+  
+  }
+
   ngOnChanges(changes: SimpleChanges) 
   {
-    let idstr: string = this.CLIENT._id;
-    if (idstr== ''|| ! idstr) return;
+    let id: string = this.CLIENT._id;
+    if (id== ''|| !id) return;
 
     if (!this.submitted) {
       this.submitted = true;
       // this.model.setId(this.CLIENT._id);
-      this.idclient = idstr;
-      
+      this.idclient = id;
+      this.getSaldoActual();
     }
     this.model = this.CLIENT;
     // this.formClient.   // continue..!

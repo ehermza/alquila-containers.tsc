@@ -76,11 +76,9 @@ export class FormAddClientComponent implements OnInit {
     }
     this.alquilerService.createRentalService(keys)
       .subscribe(
-        res => {
-//          console.log(res)
+        (res) => {
         this.router.navigate(['/clients/alert/200']);
-
-        },
+        },  
         (err) => console.log(err)
       ) 
   }

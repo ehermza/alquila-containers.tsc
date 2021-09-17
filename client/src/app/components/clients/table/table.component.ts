@@ -14,7 +14,7 @@ export class TableComponent implements OnInit {
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = ELEMENT_DATA;
-  displayedColumns: string[] = ['id_container','price_tocharge','rented_by','active', '_id'];
+  displayedColumns: string[] = ['id_container','rented_by','price_tocharge','active', '_id'];
   dataSource: any= [];
   list:any= [];
 

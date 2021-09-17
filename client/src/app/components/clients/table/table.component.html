@@ -1,24 +1,24 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
   <!-- Position Column -->
   <ng-container matColumnDef="id_container">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <th mat-header-cell *matHeaderCellDef > No. </th>
     <td mat-cell *matCellDef="let element"> {{element.id_container}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="price_tocharge">
-    <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let element"> {{element.price_tocharge}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="rented_by">
-    <th mat-header-cell *matHeaderCellDef> Client </th>
+    <th mat-header-cell *matHeaderCellDef> Cliente </th>
     <td mat-cell *matCellDef="let element"> {{element.rented_by}} </td>
+  </ng-container>
+  
+  <!-- Name Column -->
+  <ng-container matColumnDef="price_tocharge">
+    <th mat-header-cell *matHeaderCellDef> Importe </th>
+    <td mat-cell *matCellDef="let element"> ${{ element.price_tocharge }}.- </td>
   </ng-container>
 
   <!-- Symbol Column -->
