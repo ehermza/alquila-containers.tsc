@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { AlertComponent } from './alert/alert.component';
 import { FormAddPayComponent } from './pagos/form-add-pay/form-add-pay.component';
 import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button'; 
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule // for validate inputs in form-add-client
+    ReactiveFormsModule, // for validate inputs in form-add-client
+    MatIconModule,
+    MatButtonModule
 
   ], 
   exports: [

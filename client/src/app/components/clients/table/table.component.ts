@@ -3,6 +3,8 @@ import { filter } from 'rxjs/operators';
 
 import { ContainersService } from 'src/app/services/containers.service';
 
+// import DeleteIcon from '@mui/icons-material/Delete';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -17,7 +19,7 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = ['id_container','rented_by','price_tocharge','active', '_id'];
   dataSource: any= [];
   list:any= [];
-
+  
   constructor(private gameService: ContainersService) {
   }
 
