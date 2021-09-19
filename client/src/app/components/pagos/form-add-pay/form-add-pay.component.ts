@@ -92,7 +92,6 @@ export class FormAddPayComponent implements OnInit {
 
   printPaymentsOnTable(){
     const {container} = this.model;
-    console.log
     // this.rentalService.getPaymentsByCtnerCtrl()
     this.rentalService.getPaymentsByCtnerCtrl(container);
     this.readonly = false;

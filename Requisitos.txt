@@ -2,6 +2,9 @@
 ALQUILER CONTENEDORES REQUERIMIENTOS
 ====================================
 
+[]  Server Rental object
+    Do Function Delete payment button, 
+
 []	Mostrar suma total de todos los deudores,
 	 	Suma total de todos los ctner, solo mes actual sin deudas.-
 

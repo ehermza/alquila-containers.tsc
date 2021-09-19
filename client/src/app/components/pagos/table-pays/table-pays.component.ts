@@ -33,6 +33,15 @@ export class TablePaysComponent implements OnInit {
     console.log(`fecha: ${date}`);
   }
 
+  deletePayment(idpayment:string) {
+    alert(`Pago: ${idpayment}, Ctner: ${this.rentalService.container}`);
+    const idctner= this.rentalService.container;
+
+    this.rentalService.deletePaymentService(idpayment, idctner)
+      .subscribe(res => {
+        alert(res);
+      });
+  }
 }
 
 function filtrar(objeto:Pago) {
