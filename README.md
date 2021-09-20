@@ -8,9 +8,9 @@ ALQUILER CONTENEDORES REQUERIMIENTOS
 
 [] To Create the new client,
 	it would be a good idea to select one registered client if it exists, and not create a new client (with the same name)
-	just create the rental object and link the client selected with the client selected.-
+	just create the rental object and link the client selected with one container.-
 
-[]  To Correct:  /index.js
+[X]  To Correct:  /index.js
     'Delete' button, is not updating current value: debt - pays in profile client.
 
 [X]  URGENT, TO CORRECT:

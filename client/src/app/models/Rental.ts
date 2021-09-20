@@ -1,4 +1,17 @@
 
+export interface IRental {
+    id_client: string, 
+    id_container: string,
+    active: Boolean,
+    date_init: Date,
+    date_final: Date,
+    deuda_total: number,
+    deuda_register: [],
+    pagos_total: number,
+    pagos_register: []
+};
+
+
 export interface RgtDeuda {
     value: number;
     period: String;

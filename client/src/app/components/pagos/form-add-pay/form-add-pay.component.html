@@ -29,11 +29,11 @@
     <div class="card-body">
         <form (ngSubmit)="onSubmit()" [formGroup]="formAddPayment">
 
-            <!-- <div class="input-group mb-3">
-                <span class="input-group-text"> Cliente</span>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="model.client"
-                    formControlName="client" [readonly]="true" [value]="this.clientname" required>
-            </div> -->
+            <div class="input-group mb-3">
+                <span class="input-group-text"> Saldo</span>
+                <input type="text" class="form-control" [(ngModel)]="model.saldo"
+                    formControlName="saldo" readonly="true" [value]="getSaldoActual()">
+            </div>
             <div class="input-group mb-3">
                 <span class="input-group-text"> Importe</span>
                 <input type="number" class="form-control" placeholder="0.00" [(ngModel)]="model.value"

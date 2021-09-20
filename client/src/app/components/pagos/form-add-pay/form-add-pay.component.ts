@@ -26,7 +26,8 @@ export class FormAddPayComponent implements OnInit {
   // displayedColumns:string[] = ['paid_at','value','recibo_n'];
 
 //   model: Pago = new Pago();
-    model: any = {};
+    model: any = {      
+    };
     idClient: string = '-1';
     container: Contenedor|null = null;
     readonly: Boolean= true;
@@ -45,8 +46,8 @@ export class FormAddPayComponent implements OnInit {
 
   formAddPayment = new FormGroup({
     // container: new FormControl('', Validators.required),
+    saldo: new FormControl('', Validators.pattern(/^[0-9]*$/)),
     value: new FormControl('', Validators.pattern(/^[0-9]*$/)),
-    // recibo_n: new FormControl(),
     recibo_n: new FormControl('', Validators.pattern(/^[0-9]*$/)),
   });
 
@@ -66,7 +67,11 @@ export class FormAddPayComponent implements OnInit {
         (err) => console.error(err)
       );
   }
-  getTotal() {}
+  getSaldoActual() {
+    const d= this.rentalService.alquiler.deuda_total;
+    const p= this.rentalService.alquiler.pagos_total;
+    return p-d;
+  }
   insertPagotoDB() {}
 
   setClientProperty() {
@@ -90,14 +95,12 @@ export class FormAddPayComponent implements OnInit {
     )
   }
 
-  printPaymentsOnTable(){
+  printPaymentsOnTable()
+  {
     const {container} = this.model;
-    // this.rentalService.getPaymentsByCtnerCtrl()
-    this.rentalService.getPaymentsByCtnerCtrl(container);
+
+    this.rentalService.getRentalByCtner(container);
     this.readonly = false;
-    // console.log(this.container?.rented_by)
-    // this.clientname = (this.container == null)? "": this.container.rented_by;
-    this.clientname =  "perolaputamadre!"
   }
 }
 
