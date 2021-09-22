@@ -7,9 +7,9 @@
     <div class="card-body">
         <!-- <form action="/containers/edit/{{ CONTAINER._id }} " method="POST"> -->
         <form (ngSubmit)="updatePrice()" #formContainer='ngForm'>
-            <div class="input-group mb-3">
+            <!-- <div class="input-group mb-3">
                 <input type="hidden" name="_id" [(ngModel)]="model._id">
-            </div>
+            </div> -->
             <div class="input-group mb-3">
                 <span class="input-group-text">Container </span>
                 <input type="text" readonly value='{{CONTAINER.id_container}}' class="form-control" placeholder="00"

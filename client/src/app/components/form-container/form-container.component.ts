@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Contenedor } from 'src/app/models/Contenedor';
 import { Router } from '@angular/router';
+import { Container } from 'src/app/models/container';
 
 
 @Component({
@@ -15,7 +16,14 @@ export class FormContainerComponent implements OnInit {
   @Input() CONTAINER: any= {};
 
     idCtner:string= '';
-    model:Contenedor = new Contenedor(true);
+    // model:Contenedor = new Contenedor(true);
+    model: Container = {
+      id_container: '',
+      price_tocharge: -1,
+      rented_by: '',
+      rented_by_id: '0',
+      active: true
+    }
     submitted = false;
 
     constructor(
@@ -29,25 +37,25 @@ export class FormContainerComponent implements OnInit {
     ngOnChanges(changes: SimpleChanges)  
     {
       this.idCtner = this.CONTAINER._id;
-      console.log(`(formContainer) CONTAINER.get() `, this.CONTAINER);
+      // console.log(`(formContainer) CONTAINER.get() `, this.CONTAINER);
       this.model = this.CONTAINER;
-      
-/*       this.model.setId(this.CONTAINER._id);
-      this.model.setAtributtes(
-        this.CONTAINER.id_container,
-        this.CONTAINER.price_tocharge,
-        this.CONTAINER.rented_by
-      );
- */    }
+
+    }
+
+    setUnlinkValue(obj:Container) {
+      obj.rented_by = '';
+      obj.rented_by_id= '0';
+      obj.active = false;
+    }
 
     unlinkClient() 
     {
       this.submitted = true;
-      const msj = `Seguro quieres devincular al cliente  ${this.model.rented_by} del Contenedor ${this.model.id_container}`;
+      const msj = `Seguro quieres devincular al cliente ${this.model.rented_by} del Contenedor ${this.model.id_container}`;
       if (!confirm(msj)) {
         return;
       }
-      this.model.Unlinked();
+      this.setUnlinkValue(this.model);
 
       // touch backend! router.get('/containers/unlink/:idcont', async function (req, res) 
       this.http.put<any>(`/api/containers/${this.idCtner}`, this.model)
