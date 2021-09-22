@@ -2,6 +2,10 @@
 ALQUILER CONTENEDORES REQUERIMIENTOS
 ====================================
 
+[X]  ERROR /UPDATE: Corrected BUG!
+    Profile client: containers/edit/ 
+    To try change value of rental container, the property rental_by_id is '-1' Why? don't now.
+
 []	Mostrar suma total de todos los deudores,
 	 	Suma total de todos los ctner, solo mes actual sin deudas.-
 

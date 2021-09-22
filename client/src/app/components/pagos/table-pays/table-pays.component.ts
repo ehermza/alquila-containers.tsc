@@ -35,12 +35,13 @@ export class TablePaysComponent implements OnInit {
 
   deletePayment(idpayment:string) {
     // alert(`Pago: ${idpayment}, Ctner: ${this.rentalService.container}`);
-    const idctner= this.rentalService.alquiler.id_container;
+    // const idctner= this.rentalService.alquiler.id_container;
 
     if(!confirm('Estas a punto de borrar un registro de pago. Confirmar?')) {
       return;
     }
-    this.rentalService.deletePaymentService(idpayment, idctner)
+    // this.rentalService.deletePaymentService(idpayment, idctner)
+    this.rentalService.deletePaymentService(idpayment)
       .subscribe(res => {
         // alert(res);
       });

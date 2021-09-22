@@ -58,14 +58,14 @@ export class RentalService
     // return this.http.get(`/api/rental/container/${idctner}`);
   }
   
-  deletePaymentService(recibo: string, idctner: string)  {
+  deletePaymentService(recibo: string)  {
      /**
       * Action: Delete Payment by id Container
       * @param body Recibo Number, idConteiner
       * @returns Rental object 
-      */
-    const body: any = { recibo, idctner }
-    // console.log(body);
+      */     
+     const idctner = this.alquiler.id_container ;
+     
     return this.http.delete<Rental>(`/api/rental/pagos/${recibo}&${idctner}`);
   }
 

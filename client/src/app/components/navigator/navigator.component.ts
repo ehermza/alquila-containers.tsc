@@ -81,6 +81,14 @@ export class NavigatorComponent implements OnInit {
           timer: undefined
         }
         break;
+      case '437':
+        objeto = {
+          title: "Error al actualizar importe",
+          text: "Can't update the rental value.",
+          icon: 'error',
+          timer: undefined
+        }
+        break;
   
       default:
     };
