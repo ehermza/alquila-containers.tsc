@@ -3,29 +3,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { format } from 'date-fns';
 
-
-import { Client } from 'src/app/models/Client';
 import { Contenedor } from 'src/app/models/Contenedor';
 
-import { ClientService } from 'src/app/services/client.service';
 import { ContainersService } from 'src/app/services/containers.service';
 import { RentalService } from 'src/app/services/rental.service';
-
-// import { PagoService } from 'src/app/services/pago.service';
-
 
 @Component({
   selector: 'app-form-add-pay',
   templateUrl: './form-add-pay.component.html',
   styleUrls: ['./form-add-pay.component.css']
 })
-export class FormAddPayComponent implements OnInit {
 
+
+export class FormAddPayComponent implements OnInit {
+  
+  debt: any = { per: ''}
+  MESES:Array<string> = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP'];
   dataSource: any = [];
   dts: any = [];    // delete,
   // displayedColumns:string[] = ['paid_at','value','recibo_n'];
 
-//   model: Pago = new Pago();
     model: any = {      
     };
     idClient: string = '-1';
@@ -35,13 +32,15 @@ export class FormAddPayComponent implements OnInit {
 
   constructor(
     private containerService: ContainersService,
-    private clientService: ClientService,
     private rentalService: RentalService,
     private router: Router
   ) { }
 
   formSelect = new FormGroup({
     container: new FormControl('', Validators.required),
+  });
+  formDebt = new FormGroup({
+    per: new FormControl('', Validators.required),
   });
 
   formAddPayment = new FormGroup({
@@ -53,6 +52,7 @@ export class FormAddPayComponent implements OnInit {
 
   ngOnInit(): void {
     this.getContainers();
+    this.debt.per= "";
   }
 
   getContainers() {
@@ -74,6 +74,10 @@ export class FormAddPayComponent implements OnInit {
   }
   insertPagotoDB() {}
 
+  insertPerDebt(){
+    alert(this.debt.per);
+  }
+  
   setClientProperty() {
       if(this.container==null) return;
 
@@ -98,7 +102,7 @@ export class FormAddPayComponent implements OnInit {
   printPaymentsOnTable()
   {
     const {container} = this.model;
-
+      console.log(this.model);
     this.rentalService.getRentalByCtner(container);
     this.readonly = false;
   }

@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'containers', component: PageProfileComponent },
   { path: 'containers/edit/:id', component: PageProfileComponent },
 
-  {path:'pagos',component: PagePaysComponent },
+  { path:'pagos',component: PagePaysComponent },
+  { path: 'pagos/alert/:id', component: PageClientComponent },
 
   { path: '**', pathMatch: 'full', redirectTo: 'clients' }
 ];

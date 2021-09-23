@@ -89,7 +89,15 @@ export class NavigatorComponent implements OnInit {
           timer: undefined
         }
         break;
-  
+        case '260':
+        objeto = {
+          title: 'Cliente Desvinculado',
+          text: 'El contenedor queda disponible para nuevo alquiler.',
+          icon: 'success',
+          timer: MSTIMER
+        }
+        break;
+
       default:
     };
     if (alertNumber != null) fireSwalError(objeto);

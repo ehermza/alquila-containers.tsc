@@ -1,5 +1,6 @@
 // import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { format } from 'date-fns';
 // import { pipe } from "rxjs";
 import { map } from "rxjs/operators";
@@ -7,6 +8,7 @@ import { Pago } from 'src/app/models/Pago';
 
 import { PagoService } from 'src/app/services/pago.service';
 import { RentalService } from 'src/app/services/rental.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -16,41 +18,93 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class TablePaysComponent implements OnInit {
 
-  dataSource:any = [];
-  displayedColumns: string[] = ['paid_at','period','value','recibo_n', '_id'];
-  emptyAlertMsg:string = "";
+  dataSource: any = [];
+  displayedColumns: string[] = ['paid_at', 'period', 'value', 'recibo_n', '_id'];
+  emptyAlertMsg: string = "";
 
   constructor(
-    private pagoService:PagoService, 
-    public rentalService:RentalService
+    private pagoService: PagoService,
+    public rentalService: RentalService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     // this.getData();
   }
-  
-  printdate(date:string){
+
+  printdate(date: string) {
     console.log(`fecha: ${date}`);
   }
 
-  deletePayment(idpayment:string) {
-    // alert(`Pago: ${idpayment}, Ctner: ${this.rentalService.container}`);
-    // const idctner= this.rentalService.alquiler.id_container;
+  alertar(state: number) {
+    this.router.navigate([`/clients/alert/${state}`]);
 
-    if(!confirm('Estas a punto de borrar un registro de pago. Confirmar?')) {
+  }
+
+  deletePayment(idpayment: string) 
+  {
+    if (!confirm('Estas a punto de borrar un registro de pago. Confirmar?')) {
       return;
     }
     // this.rentalService.deletePaymentService(idpayment, idctner)
     this.rentalService.deletePaymentService(idpayment)
       .subscribe(res => {
-        // alert(res);
+        alertar(410);
+        this.rentalService.getRentalByCtner();
       });
   }
 }
 
-function filtrar(objeto:Pago) {
-  const dt= new Date(objeto.paid_at);
+function filtrar(objeto: Pago) {
+  const dt = new Date(objeto.paid_at);
   console.log(dt);
   objeto.paid_str = format(dt, 'dd/MM/yyyy');
   return objeto;
 }
+
+export async function fireSwal(objeto: any)
+ {
+  const { title, text, icon, timer } = objeto;
+  await Swal.fire({
+    title: title,
+    text: text,
+    icon: icon,
+    timer: timer,
+    showConfirmButton: (!timer),
+    // timerProgressBar:
+    // toast:
+    position: 'center',
+    allowOutsideClick: true,
+    showCloseButton: false,
+    confirmButtonText: 'Aceptar'
+  });
+};
+
+function alertar(state: number)
+ {
+  console.log(`state alert: ${state}`);
+
+  const MSTIMER = 3000;
+  var message, title = "";
+  var objeto = {};
+  switch (state) {
+    case 413:
+      objeto = {
+        title: "Error al agregar cliente",
+        text: "Intentalo de vuelta por favor!",
+        icon: 'error',
+        timer: undefined
+      }
+      break;
+    case 410:
+      objeto = {
+        title: 'Pago eliminado',
+        text: 'Registro de pago eliminado de la base de datos.',
+        icon: 'success',
+        timer: MSTIMER
+      }
+      break;
+  }
+  fireSwal(objeto);
+}
+

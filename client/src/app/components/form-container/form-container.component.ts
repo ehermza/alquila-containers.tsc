@@ -59,8 +59,10 @@ export class FormContainerComponent implements OnInit {
 
       // touch backend! router.get('/containers/unlink/:idcont', async function (req, res) 
       this.http.put<any>(`/api/containers/${this.idCtner}`, this.model)
-        .subscribe(
-          data => { console.log('(unlinkClient) Subscribe: ', data); }
+        .subscribe( res => {
+           console.log('(unlinkClient) Subscribe: ', res);
+           this.alertar(260);
+           }
         );
     }
 
