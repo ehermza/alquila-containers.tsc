@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-pagos',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagePagosComponent implements OnInit {
 
-  constructor() {     
+  constructor(route:ActivatedRoute) 
+  {     
+    this.idcont = route.snapshot.params.id;
   }
-  idcont:string = "614165dd08cdba49f58efec3";
+  idcont: string= '';
+  // idcont:string = "614165dd08cdba49f58efec3";
   
 
   ngOnInit(): void {
