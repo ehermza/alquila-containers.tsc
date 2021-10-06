@@ -16,6 +16,8 @@ import { TablePaysComponent } from './pagos/table-pays/table-pays.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button'; 
 
+import { FilterContPipe } from '../pipes/filter-cont.pipe';
+
 @NgModule({
   declarations: [
     NavigatorComponent,
@@ -26,7 +28,7 @@ import {MatButtonModule} from '@angular/material/button';
     // AlertComponent,
     FormAddPayComponent,
     TablePaysComponent,
-
+    FilterContPipe,
   ],
   imports: [
     CommonModule,
@@ -36,8 +38,7 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     ReactiveFormsModule, // for validate inputs in form-add-client
     MatIconModule,
-    MatButtonModule
-
+    MatButtonModule, 
   ], 
   exports: [
     NavigatorComponent,

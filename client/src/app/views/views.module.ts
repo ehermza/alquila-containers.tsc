@@ -10,6 +10,7 @@ import { ComponentsModule } from '../components/components.module';
 import { PageContainersComponent } from './page-containers/page-containers.component';
 import { PageProfileComponent } from './page-profile/page-profile.component';
 import { PagePaysComponent } from './page-pays/page-pays.component';
+import { PagePagosComponent } from './page-pagos/page-pagos.component';
 
 
 
@@ -18,7 +19,8 @@ import { PagePaysComponent } from './page-pays/page-pays.component';
     PageClientComponent,
     PageContainersComponent,
     PageProfileComponent,
-    PagePaysComponent
+    PagePaysComponent,
+    PagePagosComponent
   ],
   imports: [
     CommonModule,

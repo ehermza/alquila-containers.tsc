@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageClientComponent } from './views/page-client/page-client.component';
 import { PagePaysComponent } from './views/page-pays/page-pays.component';
 import { PageProfileComponent } from './views/page-profile/page-profile.component';
+import { PagePagosComponent } from './views/page-pagos/page-pagos.component'
 // import { TableComponent } from './components/table/table.component';
 
 const routes: Routes = [
@@ -11,6 +12,8 @@ const routes: Routes = [
 
   { path: 'containers', component: PageProfileComponent },
   { path: 'containers/edit/:id', component: PageProfileComponent },
+  { path: 'containers/payments/:id', component: PagePagosComponent },
+
 
   { path:'pagos',component: PagePaysComponent },
   { path: 'pagos/alert/:id', component: PageClientComponent },

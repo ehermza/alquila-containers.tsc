@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 
 import { ViewsModule } from './views/views.module';
 import { ComponentsModule } from './components/components.module';
+// import { FilterContPipe } from './pipes/filter-cont.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    // FilterContPipe,
   ],
   imports: [
     BrowserModule,

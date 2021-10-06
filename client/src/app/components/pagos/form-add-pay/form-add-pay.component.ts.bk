@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { format } from 'date-fns';
@@ -14,17 +14,20 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./form-add-pay.component.css']
 })
 
-export class FormAddPayComponent implements OnInit 
-{
-  @Input() CONTAINER: string= "";  
-
+export class FormAddPayComponent implements OnInit {
+  
+  debt: any = { per: ''}
+  MESES:Array<string> = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP'];
   dataSource: any = [];
+  dts: any = [];    // delete,
+  // displayedColumns:string[] = ['paid_at','value','recibo_n'];
 
     model: any = {      
     };
     idClient: string = '-1';
     container: Contenedor|null = null;
-    readonly: Boolean= false;
+    readonly: Boolean= true;
+    clientname: string = 'empty';      // delete!
 
   constructor(
     private containerService: ContainersService,
@@ -32,14 +35,14 @@ export class FormAddPayComponent implements OnInit
     private router: Router
   ) { }
 
-/*   
+  fContainer = '';
   formSelect = new FormGroup({
     container: new FormControl('', Validators.required),
   });
   formDebt = new FormGroup({
     per: new FormControl('', Validators.required),
   });
- */
+
   formAddPayment = new FormGroup({
     // container: new FormControl('', Validators.required),
     saldo: new FormControl('', Validators.pattern(/^[0-9]*$/)),
@@ -48,14 +51,11 @@ export class FormAddPayComponent implements OnInit
   });
 
   ngOnInit(): void {
-    this.model.container= this.CONTAINER;
-    console.log(this.CONTAINER);
-    this.printPaymentsOnTable();
-    // this.getContainers();
-    // this.debt.per= "";
+    this.getContainers();
+    this.debt.per= "";
   }
 
-/* 
+
   getContainers() {
     this.containerService.getContainers()
       .subscribe(
@@ -68,7 +68,6 @@ export class FormAddPayComponent implements OnInit
         (err) => console.error(err)
       );
   }
- */  
   getSaldoActual() {
     const d= this.rentalService.alquiler.deuda_total;
     const p= this.rentalService.alquiler.pagos_total;
@@ -77,6 +76,7 @@ export class FormAddPayComponent implements OnInit
   insertPagotoDB() {}
 
   insertPerDebt(){
+    alert(this.debt.per);
   }
   
   setClientProperty() {
@@ -100,10 +100,9 @@ export class FormAddPayComponent implements OnInit
     )
   }
 
-  printPaymentsOnTable()
+  printPaymentsOnTable(id:string)
   {
     // const {container} = this.model;
-    const id:string = this.CONTAINER;
     this.model.container= id;
       console.log(id);
     this.rentalService.getRentalByCtner(id);

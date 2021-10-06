@@ -1,26 +1,5 @@
-<div class="card border-primary mb-3">
-    <div class="card-header">
-        <h5 class="text-center text-primary">Registro de Pagos</h5>
-    </div>
+<h5 class="text-center text-primary">Registro de Pagos</h5>
 
-    <div class="card-body">
-        <!-- <form action="/pagos/add" method="POST"> -->
-        <form (ngSubmit)="printPaymentsOnTable()" [formGroup]="formSelect">
-            <div class="input-group mb-3">
-                <select class="form-select" formControlName="container" [(ngModel)]="model.container">
-                    <option selected value="">Seleccionar Cliente</option>
-                    <option *ngFor="let ctner of dataSource;" [value]="ctner._id">
-                        {{ctner.id_container}}. {{ctner.rented_by}}
-                    </option>
-                </select>
-            </div>
-            <button class="btn btn-block btn-primary" [disabled]="!formSelect.valid" type="submit" id="btn-select">
-                VER PAGOS
-            </button>
-        </form>
-    </div>
-
-</div>
 <div class="card border-primary mb-3" [hidden]="this.readonly">
 
     <div class="card-header">
@@ -54,31 +33,3 @@
 </div>
 
 {{model|json}}
-
-<div>
-    <div class="card border-warning">
-        <div class="card-header">
-            <h5 class="text-center text-warning">Registrar nuevo periodo</h5>
-        </div>
-        <div class="card-body">
-            <!-- <form action="/deuda/charge" method="GET"> -->
-            <form (ngSubmit)="insertPerDebt()" [formGroup]="formDebt">
-                <div class="input-group mb-3">
-                    <select class="form-select" formControlName="per" [(ngModel)]="debt.per">
-                        <option selected value="">Elegir Periodo</option>
-                        <option *ngFor="let month of MESES; index as i" [value]="month">
-                            {{i + 1}}. {{month}}
-                        </option>
-                    </select>
-
-                </div>
-                <button class="btn btn-block btn-outline-warning" type="submit" id="btn-deudacharge">
-                    NUEVO PERIODO
-                </button>
-            </form>
-        </div>
-
-    </div>
-</div>
-
-{{debt|json}}
