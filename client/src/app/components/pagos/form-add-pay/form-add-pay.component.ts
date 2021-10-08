@@ -23,8 +23,10 @@ export class FormAddPayComponent implements OnInit
     model: any = {      
     };
     idClient: string = '-1';
-    container: Contenedor|null = null;
+    objctner: Contenedor|null = null;
     readonly: Boolean= false;
+    
+    cliente : string = '';
 
   constructor(
     private containerService: ContainersService,
@@ -47,14 +49,29 @@ export class FormAddPayComponent implements OnInit
     recibo_n: new FormControl('', Validators.pattern(/^[0-9]*$/)),
   });
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.model.container= this.CONTAINER;
     console.log(this.CONTAINER);
     this.printPaymentsOnTable();
-    // this.getContainers();
+     this.getContainer();
     // this.debt.per= "";
   }
 
+  getContainer() {
+    this.containerService.getContainerOne(this.CONTAINER) 
+      .subscribe(
+        (res) => {
+          console.log( "CONTAINER: ", res);
+          const obj: any= res;
+          this.objctner = obj;
+          this.cliente = (!this.objctner)? "EHER": this.objctner.rented_by; 
+        },
+        (ERR) => {
+          this.cliente = "ERROR!";
+        }
+      )
+  }
 /* 
   getContainers() {
     this.containerService.getContainers()
@@ -72,7 +89,9 @@ export class FormAddPayComponent implements OnInit
   getSaldoActual() {
     const d= this.rentalService.alquiler.deuda_total;
     const p= this.rentalService.alquiler.pagos_total;
-    return p-d;
+    // const importe: String = "$ ";
+    return "$ ".concat((p-d).toString());
+    
   }
   insertPagotoDB() {}
 
@@ -80,9 +99,9 @@ export class FormAddPayComponent implements OnInit
   }
   
   setClientProperty() {
-      if(this.container==null) return;
+      if(this.objctner==null) return;
 
-      this.idClient = this.container.rented_by_id;
+      this.idClient = this.objctner.rented_by_id;
   }
 
   alertar(idurl:number) {

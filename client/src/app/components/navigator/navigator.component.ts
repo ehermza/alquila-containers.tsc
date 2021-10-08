@@ -13,6 +13,8 @@ export class NavigatorComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
+  title: string= "RENTAL WEB by EHER";
+
   ngOnInit(): void
   {
     const url = new URL(window.location.href);

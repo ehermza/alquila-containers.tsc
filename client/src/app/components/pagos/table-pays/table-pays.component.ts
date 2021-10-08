@@ -21,6 +21,7 @@ export class TablePaysComponent implements OnInit {
   dataSource: any = [];
   displayedColumns: string[] = ['paid_at', 'period', 'value', 'recibo_n', '_id'];
   emptyAlertMsg: string = "";
+  title: string = "Registro de Pagos";
 
   constructor(
     private pagoService: PagoService,

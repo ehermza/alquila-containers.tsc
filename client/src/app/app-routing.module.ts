@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageClientComponent } from './views/page-client/page-client.component';
 import { PagePaysComponent } from './views/page-pays/page-pays.component';
 import { PageProfileComponent } from './views/page-profile/page-profile.component';
-import { PagePagosComponent } from './views/page-pagos/page-pagos.component'
+import { PagePagosComponent } from './views/page-pagos/page-pagos.component';
+
 // import { TableComponent } from './components/table/table.component';
 
 const routes: Routes = [
