@@ -1,47 +1,4 @@
 
-const rental = new Schema({
-    id_client: String, 
-    id_container: String,
-    active: Boolean,
-    date_init: Date,
-    date_final: Date,
-    deuda_total: Number,
-    deuda_register: {
-        value: number,
-        period: String,
-    }
-    pagos_total: Number,
-    pagos_register:{
-        value: number,
-        period: String,
-        paid_at: Date,
-        recibo_n: String
-    }
-});
-*******************************************************
-
-const pagoSchema = new Schema({
-//    client: { type: String, default: '@Nombre' },
-//    id_container: Number,
-    id_rental: String,    
-    value: { type: Number, required: true },
-    month_paid: { type: String, default: '' },
-    paid_at: { type: Date, default: Date.now() },
-    recibo_n: { type: String, default: '000000' },
-});
-module.exports = model('pago', pagoSchema);
-*******************************************************
-
-const deudaSchema = new Schema({
-//    client: { type: String, default: '@Nombre' },
-//    id_container: Number,
-    id_rental: String,
-    value: { type: Number, required: true },
-    period: { type: String, default: '' },
-});
-module.exports = model('deuda', deudaSchema);
-*******************************************************
-
 const ClientSchema = new Schema({
     name: { type: String, required: true },
     telephone: { type: String, default: 'Ingresar' },
@@ -61,3 +18,51 @@ const ContainerSchema = new Schema({
 });
 module.exports = model('container', ContainerSchema);
 *******************************************************
+ 
+const rentalSchema = new Schema(
+    {
+        id_client: {type:String, required:true},
+        id_container: {type:String, required:true},
+
+        active: Boolean,
+        date_init: {
+            type:Date, 
+            default: Date.now,
+            required: true
+        },
+        date_final: Date,
+
+        deuda_total: Number,
+        deuda_register: [{value: Number,period: String}],
+
+        pagos_total: Number,
+        pagos_register: [{
+            value: Number,
+            period: String,
+            paid_at: Date,
+            recibo_n: String
+        }],
+        last_payment: {
+            period: String,
+            a_cta: Number
+        }
+   }
+);
+export default model<IRental>('rental', rentalSchema);
+*********************************************************************
+
+const DebtSchema = new Schema(
+    {
+        id_rental: { type: String, required: true },
+        number_ctner: { type: String, required: true },
+        name_client: { type: String, required: true },
+        current_debt: { type: Number, required: true },
+        price_rental: { type: Number, required: true },
+        overdue_debt: { type: Number, default: 0 },
+        paid_current_per: { type: String, default: '0' }
+    }
+);
+export default model('debt', DebtSchema);
+
+
+

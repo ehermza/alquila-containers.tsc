@@ -90,7 +90,7 @@ export class FormAddPayComponent implements OnInit
     const d= this.rentalService.alquiler.deuda_total;
     const p= this.rentalService.alquiler.pagos_total;
     // const importe: String = "$ ";
-    return "$ ".concat((p-d).toString());
+    return "$ ".concat((d-p).toString());
     
   }
   insertPagotoDB() {}

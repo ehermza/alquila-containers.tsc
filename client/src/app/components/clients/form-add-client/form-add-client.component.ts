@@ -20,6 +20,7 @@ export class FormAddClientComponent implements OnInit {
 
   idCtner: string = '';
   idClient: string = '';
+  
   list: any = [];
   dataSource: any = [];
 
@@ -72,7 +73,9 @@ export class FormAddClientComponent implements OnInit {
      */
      const keys = {
       "ptr_client": this.idClient,
-      "ptr_ctner" : this.idCtner
+      "ptr_ctner" : this.idCtner,
+      "client_name": this.model.rented_by, 
+      "ctner_number": this.model.id_container
     }
     this.alquilerService.createRentalService(keys)
       .subscribe(
