@@ -23,6 +23,7 @@ const rentalSchema = new Schema(
     {
         id_client: {type:String, required:true},
         id_container: {type:String, required:true},
+        id_debtinfo: String,
 
         active: Boolean,
         date_init: {
@@ -31,10 +32,8 @@ const rentalSchema = new Schema(
             required: true
         },
         date_final: Date,
-
         deuda_total: Number,
         deuda_register: [{value: Number,period: String}],
-
         pagos_total: Number,
         pagos_register: [{
             value: Number,
@@ -43,8 +42,7 @@ const rentalSchema = new Schema(
             recibo_n: String
         }],
         last_payment: {
-            period: String,
-            a_cta: Number
+            period: String, a_cta: Number
         }
    }
 );
@@ -53,16 +51,15 @@ export default model<IRental>('rental', rentalSchema);
 
 const DebtSchema = new Schema(
     {
-        id_rental: { type: String, required: true },
-        number_ctner: { type: String, required: true },
-        name_client: { type: String, required: true },
-        current_debt: { type: Number, required: true },
-        price_rental: { type: Number, required: true },
-        overdue_debt: { type: Number, default: 0 },
-        paid_current_per: { type: String, default: '0' }
+        number_ctner: { type: String }, 
+        name_client: { type: String }, 
+        current_debt: { type: Number },
+        price_rental: { type: Number }, 
+        overdue_debt: { type: Number }, 
+        paid_current_per: { type: String }, 
     }
 );
-export default model('debt', DebtSchema);
+export default model<IDebt>('debt', DebtSchema);
 
 
 

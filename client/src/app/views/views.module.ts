@@ -11,8 +11,7 @@ import { PageContainersComponent } from './page-containers/page-containers.compo
 import { PageProfileComponent } from './page-profile/page-profile.component';
 import { PagePaysComponent } from './page-pays/page-pays.component';
 import { PagePagosComponent } from './page-pagos/page-pagos.component';
-
-
+import { PageDebtsComponent } from './page-debts/page-debts.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,8 @@ import { PagePagosComponent } from './page-pagos/page-pagos.component';
     PageContainersComponent,
     PageProfileComponent,
     PagePaysComponent,
-    PagePagosComponent
+    PagePagosComponent,
+    PageDebtsComponent    // Nov-28th, 2021
   ],
   imports: [
     CommonModule,

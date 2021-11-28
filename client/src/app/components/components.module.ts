@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button'; 
 
 import { FilterContPipe } from '../pipes/filter-cont.pipe';
+import { DebtTableComponent } from './debt-table/debt-table.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FilterContPipe } from '../pipes/filter-cont.pipe';
     FormAddPayComponent,
     TablePaysComponent,
     FilterContPipe,
+    DebtTableComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { FilterContPipe } from '../pipes/filter-cont.pipe';
 
     FormAddPayComponent,  // page-pays
     TablePaysComponent,   // page-pays
+    DebtTableComponent
     // AlertComponent
   ]
 })
