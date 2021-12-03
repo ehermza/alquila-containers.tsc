@@ -19,10 +19,11 @@ import Swal from 'sweetalert2';
 export class TablePaysComponent implements OnInit {
 
   dataSource: any = [];
+  // aCtaPayment: number = -1;
   displayedColumns: string[] = ['paid_at', 'period', 'value', 'recibo_n', '_id'];
   emptyAlertMsg: string = "";
   title: string = "Registro de Pagos";
-
+  
   constructor(
     private pagoService: PagoService,
     public rentalService: RentalService,
@@ -30,7 +31,6 @@ export class TablePaysComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getData();
   }
 
   printdate(date: string) {

@@ -1,16 +1,27 @@
 
-export interface IRental {
+export interface IRental 
+{
     id_client: string, 
     id_container: string,
+    id_debtinfo: string,
+
     active: Boolean,
     date_init: Date,
     date_final: Date,
+
     deuda_total: number,
     deuda_register: [],
+
     pagos_total: number,
-    pagos_register: []
+    pagos_register: [],
+
+    last_payment: ProxPago
 };
 
+export interface ProxPago {
+    period: String;
+    a_cta : number;
+}
 
 export interface RgtDeuda {
     value: number;

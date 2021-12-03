@@ -8,22 +8,29 @@ import { IRental, Rental, RgtPago } from '../models/Rental';
 @Injectable({
   providedIn: 'root'
 })
-export class RentalService {
+export class RentalService
+ {
   public alquiler: IRental = {
     id_client: '',
     id_container: '',
+    id_debtinfo: '',
+
     active: false,
     date_init: new Date,
     date_final: new Date,
     deuda_total: -1,
     deuda_register: [],
     pagos_total: -1,
-    pagos_register: []
-
+    pagos_register: [],
+    last_payment: {
+      period: '', 
+      a_cta: 0
+    }    
   };
   public pagos: RgtPago[] = [];
   public container: string = "";
   public blEmptyTable: string = "";
+  public aCtaProxPayment: number= -1;
 
   constructor(
     private http: HttpClient
@@ -37,6 +44,9 @@ export class RentalService {
     return this.http.post('/api/rental/pagos/', body);
   }
 
+  getACtaProxPayment() {
+    // return this.alquiler.last_payment.a_cta;
+  }
   getRentalByCtner(idctner?: string) {
     /**
      * Action: Get one Rental active Object by Container Number
@@ -56,6 +66,7 @@ export class RentalService {
 
         this.pagos = this.alquiler.pagos_register.map(formatDate);
         this.blEmptyTable = (!this.pagos.length) ? "Not Payments" : "";
+        this.aCtaProxPayment = this.alquiler.last_payment.a_cta;
       });
   }
 

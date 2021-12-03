@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IDebt } from 'src/app/models/Debt';
+import { DebtInfoService } from 'src/app/services/debt-info.service';
 
 @Component({
   selector: 'app-page-debts',
@@ -10,6 +13,7 @@ export class PageDebtsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+      
   }
 
 }

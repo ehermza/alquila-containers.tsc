@@ -9,6 +9,9 @@ ALQUILER CONTENEDORES REQUERIMIENTOS
 []	Mostrar suma total de todos los deudores,
 	 	Suma total de todos los ctner, solo mes actual sin deudas.-
 
+[]  /containers/payments/
+    Mostrar importe acta. para el próximo pago.
+        Rental.last_payment.a_cta
 
 [] To Create the new client,
 	it would be a good idea to select one registered client if it exists, and not create a new client (with the same name)

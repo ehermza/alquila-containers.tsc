@@ -2,6 +2,15 @@
 ALQUILER CONTENEDORES REQUERIMIENTOS
 ====================================
 
+[]  URGENT to CORRECT: CRITIC
+    To try insert Debt, Don't upgrade Debt Table.
+    http://localhost:5300/api/rental/insertdebt/   
+    Date: Dic.03th,2021
+
+[]  /containers/payments/
+    Mostrar importe acta. para el próximo pago.
+        Rental.last_payment.a_cta
+
 []  Server Rental object
     Do Function Delete payment button, 
 
